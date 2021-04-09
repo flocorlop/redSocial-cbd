@@ -1,13 +1,11 @@
 package redSocial.model;
 
-import org.springframework.data.neo4j.core.schema.Id;
-import org.springframework.data.neo4j.core.schema.*;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.neo4j.ogm.annotation.NodeEntity;
 
-@Node
+@NodeEntity
 public class Person {
  
-  @Id @GeneratedValue private Long id;
+  @org.neo4j.ogm.annotation.Id @org.neo4j.ogm.annotation.GeneratedValue private Long id;
 
   private String firstName;
   private String lastName;

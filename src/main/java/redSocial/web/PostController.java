@@ -7,23 +7,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import redSocial.model.Person;
-import redSocial.service.PersonService;
+import redSocial.model.Post;
+import redSocial.service.PostService;
 
 @RestController
-public class PersonController {
+public class PostController {
 
-	private final PersonService personService;
+	private final PostService postService;
 
 	@Autowired
-	public PersonController(final PersonService personService) {
+	public PostController(final PostService postService) {
 		super();
-		this.personService = personService;
+		this.postService = postService;
 	}
 
-	@PostMapping("/persons/new")
-	private Person savePerson(@RequestBody Person person) {
-		return personService.save(person);
+	@PostMapping("/posts/new")
+	private Post savePost(@RequestBody Post p) {
+		return postService.save(p);
 	}
 
 //	@GetMapping("/persons")
@@ -32,9 +32,9 @@ public class PersonController {
 //		model.put("results", results);
 //		return "persons/listPersons";
 //	}
-	@GetMapping("/persons")
-	private List<Person> getAllPersons() {
-		return personService.getPersons();
+	@GetMapping("/posts")
+	private List<Post> getAllPosts() {
+		return postService.getPosts();
 	}
 
 }

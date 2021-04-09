@@ -9,6 +9,6 @@ import redSocial.model.Person;
 
 public interface PersonRepository extends Neo4jRepository<Person, Long> {
 	
-	@Query("MATCH (n:Person) RETURN n")
+	@org.springframework.data.neo4j.annotation.Query("MATCH (n:Person) RETURN n")
 	List<Person> getPersons();
 }
