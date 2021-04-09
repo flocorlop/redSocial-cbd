@@ -14,10 +14,10 @@ public class PersonService {
 	private PersonRepository personRepository;
 
 	
-	public Person savePerson(Person person) {
+	public Person save(Person person) {
 		return personRepository.save(person);
 	}
 	public List<Person> getPersons() {
-		return (List<Person>) personRepository.findAll();
+		return (List<Person>) personRepository.getPersons();
 	}
 }
