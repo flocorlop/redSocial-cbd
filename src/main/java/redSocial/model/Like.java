@@ -12,7 +12,12 @@ public class Like {
 	    @StartNode private Person person;
 	    @EndNode   private Post post;
 		
-	    public Long getRelationshipId() {
+	    public Like(Person person, Post post) {
+			super();
+			this.person = person;
+			this.post = post;
+		}
+		public Long getRelationshipId() {
 			return relationshipId;
 		}
 		public void setRelationshipId(Long relationshipId) {

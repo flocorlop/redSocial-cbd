@@ -3,6 +3,7 @@ package redSocial.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import redSocial.model.Person;
@@ -19,5 +20,9 @@ public class PersonService {
 	}
 	public List<Person> getPersons() {
 		return (List<Person>) personRepository.getPersons();
+	}
+	
+	public Person findByUsername(@Param("personUsername")String personUsername) {
+		return personRepository.findByUsername(personUsername);
 	}
 }
