@@ -12,7 +12,7 @@ import redSocial.model.Post;
 @EnableNeo4jRepositories
 public interface PostRepository extends Neo4jRepository<Post, Long> {
 	
-	@Query("MATCH (n:Post)-[r:UPLOADED_BY]-(p:Person) RETURN n,r,p")
+	@Query("MATCH p=()-[]->() RETURN p")
 	List<Post> getPosts();
 	
 	@Query("CREATE (p:Post)-[r:UPLOADED_BY]->(pe:Person)")

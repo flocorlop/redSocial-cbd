@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import redSocial.model.Person;
 import redSocial.model.Post;
 import redSocial.service.PersonService;
 import redSocial.service.PostService;
-
+import javax.validation.Valid;
 @RestController
 public class PostController {
 
@@ -29,12 +30,14 @@ public class PostController {
 	}
 
 	@PostMapping("{myself}/posts/new")
-	private Post postPost(Post p, @PathVariable("myself") String myUsername) {
+	private Post postPost(@RequestBody @Valid Post p, @PathVariable("myself") String myUsername) {
+		System.out.println("likes"+p.getLikes()+"texto"+p.getText()+"gustado"+p.getLikedBy()+"subido"+p.getUploadedBy());
 		Person me = personService.findByUsername(myUsername);
 		Set<Person> set = new HashSet<Person>();
-		Post postn = new Post(p.getLikes(),p.getText(),set,me);
+		p.setLikedBy(set);
+		p.setUploadedBy(me);
 		
-		return postService.save(postn);
+		return this.postService.savePost(p);
 	}
 
 //	@GetMapping("/posts")

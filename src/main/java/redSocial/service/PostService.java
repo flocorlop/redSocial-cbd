@@ -14,7 +14,7 @@ public class PostService {
 	@Autowired
 	private PostRepository postRepository;
 
-	public Post save(Post p) {
+	public Post savePost(Post p) {
 		return postRepository.save(p);
 	}
 	public Post createRelUploaded(Post p, Person pe) {

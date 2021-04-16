@@ -47,7 +47,7 @@ public class RedSocialApplication {
 			lista.add(po1);
 			lista.add(po2);
 			for (Post pon : lista) {
-				postS.save(pon);
+				postS.savePost(pon);
 			}
 
 		};
