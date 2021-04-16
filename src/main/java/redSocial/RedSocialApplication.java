@@ -37,10 +37,10 @@ public class RedSocialApplication {
 			Person pe1 = new Person("flor", "c", "fcl");
 			Person pe2 = new Person("mar", "o", "moc");
 			Set<Person> set1 = new HashSet<Person>();
-			set1.add(pe1);
-			set1.add(pe2);
+//			set1.add(pe1);
+//			set1.add(pe2);
 			Set<Person> set2 = new HashSet<Person>();
-			set2.add(pe2);
+//			set2.add(pe2);
 			Post po1 = new Post(2,"post 1", set1, pe1);
 			Post po2 = new Post(4,"post 2", set2, pe2);
 			Set<Post> lista = new HashSet<Post>();

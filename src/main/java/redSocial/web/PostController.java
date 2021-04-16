@@ -51,5 +51,11 @@ public class PostController {
 	private List<Post> getAllPosts() {
 		return postService.getPosts();
 	}
+	
+	@GetMapping("{myself}/my-posts")
+	private List<Post> getMyPosts(@RequestBody @PathVariable("myself") String myUsername) {
+		System.out.println("usuario"+myUsername);
+		return this.postService.getPostsByUsername(myUsername);
+	}
 
 }

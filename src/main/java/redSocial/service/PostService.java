@@ -23,4 +23,7 @@ public class PostService {
 	public List<Post> getPosts() {
 		return (List<Post>) postRepository.getPosts();
 	}
+	public List<Post> getPostsByUsername(String username) {
+		return (List<Post>) postRepository.getPostsByUsername(username);
+	}
 }
