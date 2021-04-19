@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import redSocial.model.Person;
 import redSocial.model.Post;
 import redSocial.repository.PostRepository;
 
@@ -17,11 +16,12 @@ public class PostService {
 	public Post savePost(Post p) {
 		return postRepository.save(p);
 	}
-	public Post createRelUploaded(Post p, Person pe) {
-		return postRepository.createRelUploaded(p,pe);
-	}
+	
 	public List<Post> getPosts() {
-		return (List<Post>) postRepository.getPosts();
+		return (List<Post>) postRepository.findAll();
+	}
+	public Post getPostById(int id) {
+		return postRepository.getPostById(id);
 	}
 	public List<Post> getPostsByUsername(String username) {
 		return (List<Post>) postRepository.getPostsByUsername(username);
