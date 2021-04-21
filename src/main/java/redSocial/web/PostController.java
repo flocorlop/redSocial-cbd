@@ -53,8 +53,8 @@ public class PostController {
 		Set<Person> set = new HashSet<Person>();
 		p.setLikedBy(set);
 		p.setUploadedBy(me);
-		System.out.println("Nuevo post: likes" + p.getLikes() + ",texto" + p.getText() + ",gustado" + p.getLikedBy()
-				+ ",subido" + p.getUploadedBy());
+		System.out.println("Nuevo post: likes " + p.getLikes() + ",texto " + p.getText() + ",gustado " + p.getLikedBy()
+				+ ",subido por " + p.getUploadedBy().getUsername());
 
 		return this.postService.savePost(p);
 
@@ -64,15 +64,25 @@ public class PostController {
 	private void likePost(@PathVariable("myself") String myUsername, @PathVariable("id") int id) {
 		Person me = personService.findByUsername(myUsername);
 		Post postLiked = postService.getPostById(id);
-		Set<Person> likers = postLiked.getLikedBy();
+		Person uploadedBy = personService.findUploadedbyByPostID(id);
+		Set<Person> likers = personService.findLikedbyByPostID(id);
+
+		System.out.println("likes anteriores" + postLiked.getLikes() + ", " + likers);
 		if (likers == null) {
 			likers = new HashSet<>();
+			likers.add(me);
+			postLiked.setLikedBy(likers);
+			// System.out.println("no tenia likers, ahora: " + likers);
+		} else {
+			likers.add(me);
+			postLiked.setLikedBy(likers);
+			// System.out.println("likers + el nuevo" + likers);
 		}
-		
-		likers.add(me);
-		postLiked.setLikedBy(likers);
+		postLiked.setUploadedBy(uploadedBy);
+		postLiked.setLikes(postLiked.getLikes() + 1);
 		postService.savePost(postLiked);
-		System.out.println("me gusta dado");
+		System.out.println("me gusta dado, ahora tiene:" + postLiked.getLikes() + " lista: " + likers + ", subido por: "
+				+ postLiked.getUploadedBy());
 	}
 
 }

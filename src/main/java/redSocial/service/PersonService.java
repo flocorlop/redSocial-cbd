@@ -1,6 +1,7 @@
 package redSocial.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -24,5 +25,14 @@ public class PersonService {
 	
 	public Person findByUsername(@Param("personUsername")String personUsername) {
 		return personRepository.findByUsername(personUsername);
+	}
+	
+	public Person findUploadedbyByPostID(@Param("id")int  id) {
+		return personRepository.findUploadedbyByPostID(id);
+		
+	}
+	public Set<Person> findLikedbyByPostID(@Param("id")int  id) {
+		return personRepository.findLikedbyByPostID(id);
+		
 	}
 }
