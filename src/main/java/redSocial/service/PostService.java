@@ -1,6 +1,7 @@
 package redSocial.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,14 @@ public class PostService {
 	}
 	public List<Post> getPostsByUsername(String username) {
 		return (List<Post>) postRepository.getPostsByUsername(username);
+	}
+	public Post getPostsByNumLikes(int id) {
+		return postRepository.getPostsByNumLikes(id);
+	}
+	public Set<Post> searchPostByText(String t){
+		return postRepository.getPostByText(t);
+	}
+	public Set<Post> searchPostContainsText(String t){
+		return postRepository.getPostContainsText(t);
 	}
 }

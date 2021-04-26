@@ -1,6 +1,7 @@
 package redSocial.repository;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
@@ -20,4 +21,13 @@ public interface PostRepository extends Neo4jRepository<Post, Long> {
 	
 	@Query("MATCH (pe:Person {username: $username}) <-[r1:UPLOADED_BY]-(p:Post) RETURN p")
 	List<Post> getPostsByUsername(@Param("username")String username);
+	
+	@Query("MATCH (p:Post) WHERE p.likes >= $num RETURN p")
+	Post getPostsByNumLikes(@Param("num") int num);
+	
+	@Query("MATCH(post:Post) WHERE post.text = $t RETURN post")
+    Set<Post> getPostByText(String t);
+	
+	@Query("MATCH(post:Post) WHERE post.text CONTAINS $t RETURN post")
+    Set<Post> getPostContainsText(String t);
 }

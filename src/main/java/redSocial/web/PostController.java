@@ -1,7 +1,9 @@
 package redSocial.web;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import redSocial.model.Person;
@@ -32,23 +35,39 @@ public class PostController {
 
 	// gets
 	@GetMapping("/posts")
-	private List<Post> getAllPosts() {
-		return postService.getPosts();
+	public List<Post> getAllPosts(final Map<String, Object> model) {
+		List<Post> results = this.postService.getPosts();
+		model.put("results", results);
+		return results;
 	}
 
 	@GetMapping("/posts/{id}")
-	private Post getPost(@RequestBody @PathVariable("id") int id) {
+	public Post getPost(@RequestBody @PathVariable("id") int id) {
 		return postService.getPostById(id);
 	}
 
 	@GetMapping("{myself}/my-posts")
-	private List<Post> getMyPosts(@RequestBody @PathVariable("myself") String myUsername) {
-		return this.postService.getPostsByUsername(myUsername);
+	public List<Post> getMyPosts(@RequestBody @PathVariable("myself") String myUsername, final Map<String,Object> model) {
+		//un for de lista con las relaciones que van aparte
+		List <Post> results = new ArrayList<>(); 
+		List<Post> myPosts = this.postService.getPostsByUsername(myUsername);
+		for (Post p : myPosts ) {
+			
+			results.add(p); 
+		}
+	 
+		model.put("results", results);
+		return results;
+	//esa seria la idea cada post tiene like y texto y por otra parte sacar los likers
+	 }
+	
+	@GetMapping("/posts/{id}/likers")
+	public Set<Person> getLikersByPostID(@RequestBody @PathVariable("id") int id) {
+		return personService.findLikedbyByPostID(id);
 	}
-
 	// posts
 	@PostMapping("{myself}/posts/new")
-	private Post postPost(@RequestBody @Valid Post p, @PathVariable("myself") String myUsername) {
+	public Post postPost(@RequestBody @Valid Post p, @PathVariable("myself") String myUsername) {
 		Person me = personService.findByUsername(myUsername);
 		Set<Person> set = new HashSet<Person>();
 		p.setLikedBy(set);
@@ -61,7 +80,7 @@ public class PostController {
 	}
 
 	@PostMapping("{myself}/posts/{id}/like")
-	private void likePost(@PathVariable("myself") String myUsername, @PathVariable("id") int id) {
+	public void likePost(@PathVariable("myself") String myUsername, @PathVariable("id") int id) {
 		Person me = personService.findByUsername(myUsername);
 		Post postLiked = postService.getPostById(id);
 		Person uploadedBy = personService.findUploadedbyByPostID(id);
@@ -84,5 +103,25 @@ public class PostController {
 		System.out.println("me gusta dado, ahora tiene:" + postLiked.getLikes() + " lista: " + likers + ", subido por: "
 				+ postLiked.getUploadedBy());
 	}
+	
+	//FILTERS
+	@GetMapping("/posts/filters/likes/{num}")
+	public Post filterPostsNumLikes(@RequestBody @PathVariable("num") int num) {
+		return postService.getPostsByNumLikes(num);
+		//los posts que tengan >= a ese numero de likes
+	}
+	
 
+	//SEARCHES
+	@GetMapping("/posts/searchByText/")
+	public Set<Post> searchPostByText(@RequestParam String text){
+		return postService.searchPostByText(text);
+		
+	}
+	@GetMapping("/posts/containsText/")
+	public Set<Post> searchPostContainsText(@RequestParam String text){
+		return postService.searchPostContainsText(text);
+		
+	}
+	
 }
