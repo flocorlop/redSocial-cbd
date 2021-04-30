@@ -36,4 +36,7 @@ public class PostService {
 	public Set<Post> searchPostContainsText(String t){
 		return postRepository.getPostContainsText(t);
 	}
+	public void deletePost(int id) {
+		postRepository.deleteById((long) id);
+	}
 }

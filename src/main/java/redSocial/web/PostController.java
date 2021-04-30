@@ -47,24 +47,27 @@ public class PostController {
 	}
 
 	@GetMapping("{myself}/my-posts")
-	public List<Post> getMyPosts(@RequestBody @PathVariable("myself") String myUsername, final Map<String,Object> model) {
-		//un for de lista con las relaciones que van aparte
-		List <Post> results = new ArrayList<>(); 
+	public List<Post> getMyPosts(@RequestBody @PathVariable("myself") String myUsername,
+			final Map<String, Object> model) {
+		// un for de lista con las relaciones que van aparte
+		List<Post> results = new ArrayList<>();
 		List<Post> myPosts = this.postService.getPostsByUsername(myUsername);
-		for (Post p : myPosts ) {
-			
-			results.add(p); 
+		for (Post p : myPosts) {
+
+			results.add(p);
 		}
-	 
+
 		model.put("results", results);
 		return results;
-	//esa seria la idea cada post tiene like y texto y por otra parte sacar los likers
-	 }
-	
+		// esa seria la idea cada post tiene like y texto y por otra parte sacar los
+		// likers
+	}
+
 	@GetMapping("/posts/{id}/likers")
 	public Set<Person> getLikersByPostID(@RequestBody @PathVariable("id") int id) {
 		return personService.findLikedbyByPostID(id);
 	}
+
 	// posts
 	@PostMapping("{myself}/posts/new")
 	public Post postPost(@RequestBody @Valid Post p, @PathVariable("myself") String myUsername) {
@@ -79,6 +82,42 @@ public class PostController {
 
 	}
 
+	@PostMapping("{myself}/posts/{id}/edit")
+	public void editPost(@RequestBody @Valid Post p, @PathVariable("myself") String myUsername,
+			@PathVariable("id") int id) {
+		Person me = personService.findByUsername(myUsername);
+		Post postLiked = postService.getPostById(id);
+		Person uploadedBy = personService.findUploadedbyByPostID(id);
+
+		Set<Person> likers = personService.findLikedbyByPostID(id);
+
+		if ((me.getUsername()).equals(uploadedBy.getUsername())) {
+			System.out.println("texto anterior: " + postLiked.getText());
+			postLiked.setText(p.getText());
+			postLiked.setUploadedBy(uploadedBy);
+			postLiked.setLikedBy(likers);
+			postService.savePost(postLiked);
+			System.out.println("texto ahora: " + postLiked.getText());
+		} else {
+			System.out.println("no puedes editar el post que no es tuyo");
+		}
+	}
+
+	@PostMapping("{myself}/posts/{id}/delete")
+	public void deletePost(@PathVariable("myself") String myUsername, @PathVariable("id") int id) {
+		Person me = personService.findByUsername(myUsername);
+		Post postLiked = postService.getPostById(id);
+		Person uploadedBy = personService.findUploadedbyByPostID(id);
+
+		if ((me.getUsername()).equals(uploadedBy.getUsername())) {
+
+			postService.deletePost(postLiked.getId().intValue());
+			System.out.println("borrado el post");
+		} else {
+			System.out.println("no puedes borrar el post que no es tuyo");
+		}
+	}
+
 	@PostMapping("{myself}/posts/{id}/like")
 	public void likePost(@PathVariable("myself") String myUsername, @PathVariable("id") int id) {
 		Person me = personService.findByUsername(myUsername);
@@ -91,11 +130,9 @@ public class PostController {
 			likers = new HashSet<>();
 			likers.add(me);
 			postLiked.setLikedBy(likers);
-			// System.out.println("no tenia likers, ahora: " + likers);
 		} else {
 			likers.add(me);
 			postLiked.setLikedBy(likers);
-			// System.out.println("likers + el nuevo" + likers);
 		}
 		postLiked.setUploadedBy(uploadedBy);
 		postLiked.setLikes(postLiked.getLikes() + 1);
@@ -103,25 +140,25 @@ public class PostController {
 		System.out.println("me gusta dado, ahora tiene:" + postLiked.getLikes() + " lista: " + likers + ", subido por: "
 				+ postLiked.getUploadedBy());
 	}
-	
-	//FILTERS
+
+	// FILTERS
 	@GetMapping("/posts/filters/likes/{num}")
 	public Post filterPostsNumLikes(@RequestBody @PathVariable("num") int num) {
 		return postService.getPostsByNumLikes(num);
-		//los posts que tengan >= a ese numero de likes
+		// los posts que tengan >= a ese numero de likes
 	}
-	
 
-	//SEARCHES
+	// SEARCHES
 	@GetMapping("/posts/searchByText/")
-	public Set<Post> searchPostByText(@RequestParam String text){
+	public Set<Post> searchPostByText(@RequestParam String text) {
 		return postService.searchPostByText(text);
-		
+
 	}
+
 	@GetMapping("/posts/containsText/")
-	public Set<Post> searchPostContainsText(@RequestParam String text){
+	public Set<Post> searchPostContainsText(@RequestParam String text) {
 		return postService.searchPostContainsText(text);
-		
+
 	}
-	
+
 }
