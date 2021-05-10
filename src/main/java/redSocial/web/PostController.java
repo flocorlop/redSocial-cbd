@@ -35,10 +35,10 @@ public class PostController {
 
 	// gets
 	@GetMapping("/posts")
-	public List<Post> getAllPosts(final Map<String, Object> model) {
+	public String getAllPosts(final Map<String, Object> model) {
 		List<Post> results = this.postService.getPosts();
 		model.put("results", results);
-		return results;
+		return "offers/offersList";
 	}
 
 	@GetMapping("/posts/{id}")
