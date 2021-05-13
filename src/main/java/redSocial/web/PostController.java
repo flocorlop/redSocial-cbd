@@ -7,12 +7,12 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import redSocial.model.Person;
 import redSocial.model.Post;
@@ -20,7 +20,7 @@ import redSocial.service.PersonService;
 import redSocial.service.PostService;
 import javax.validation.Valid;
 
-@RestController
+@Controller
 public class PostController {
 
 	private final PostService postService;
@@ -38,7 +38,7 @@ public class PostController {
 	public String getAllPosts(final Map<String, Object> model) {
 		List<Post> results = this.postService.getPosts();
 		model.put("results", results);
-		return "offers/offersList";
+		return "welcome";
 	}
 
 	@GetMapping("/posts/{id}")
