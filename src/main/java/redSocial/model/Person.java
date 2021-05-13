@@ -21,12 +21,20 @@ public class Person {
 	private String lastName;
 	private String username;
 	
-	
+	@Relationship(type="INTERESTED IN",direction=Relationship.OUTGOING)
 	private Set<Hobby> hobbies;
 	@Relationship(type="FOLLOWS",direction=Relationship.OUTGOING)
 	private Set<Person> follows;
 	@Relationship(type="FOLLOWED BY",direction=Relationship.INCOMING)
 	private Set<Person> followers;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getFirstName() {
 		return firstName;
