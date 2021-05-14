@@ -34,23 +34,28 @@ public class RedSocialApplication {
 		return args -> {
 			postR.deleteAll();
 			perR.deleteAll();
-			
+
 			Person pe1 = new Person("flor", "correa", "fcl");
 			Person pe2 = new Person("isa", "duran", "idv");
 			Person pe3 = new Person("eva", "romero", "evj");
-			
+
 			Set<Person> set1 = new HashSet<Person>();
 			set1.add(pe1);
 			set1.add(pe2);
-			
+
 			Set<Person> set2 = new HashSet<Person>();
 			set2.add(pe2);
-			
+
 			Post po1 = new Post(2, "post 1", set1, pe1);
 			Post po2 = new Post(1, "post 2", set2, pe2);
-
+			Post po3 = new Post(1, "post 3", set2, pe2);
+			Post po4 = new Post(1, "post 4", set2, pe2);
+			Post po5 = new Post(1, "post 5", set2, pe2);
 			postS.savePost(po1);
 			postS.savePost(po2);
+			postS.savePost(po3);
+			postS.savePost(po4);
+			postS.savePost(po5);
 
 			perR.save(pe1);
 			perR.save(pe2);
