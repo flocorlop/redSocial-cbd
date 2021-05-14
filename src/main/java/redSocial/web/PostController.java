@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import redSocial.model.Person;
 import redSocial.model.Post;
@@ -38,29 +39,39 @@ public class PostController {
 	public String getAllPosts(final Map<String, Object> model) {
 		List<Post> results = this.postService.getPosts();
 		model.put("results", results);
-		return "welcome";
+		return "posts/allPosts";
 	}
 
 	@GetMapping("/posts/{id}")
-	public Post getPost(@RequestBody @PathVariable("id") int id) {
-		return postService.getPostById(id);
+	public String getPost(@RequestBody @PathVariable("id") int id, final Map<String, Object> model) {
+		String res = "posts/postDetails";
+		Post p = this.postService.getPostById(id);
+		Person uploadedBy = this.personService.findUploadedbyByPostID(id);
+		Set<Person> likedBy = this.personService.findLikedbyByPostID(id);
+		model.put("post", p);
+		model.put("uploadedBy", uploadedBy);
+		model.put("likedBy", likedBy);
+		return res;
 	}
 
 	@GetMapping("{myself}/my-posts")
-	public List<Post> getMyPosts(@RequestBody @PathVariable("myself") String myUsername,
+	public String getMyPosts(@RequestBody @PathVariable("myself") String myUsername,
 			final Map<String, Object> model) {
 		// un for de lista con las relaciones que van aparte
 		List<Post> results = new ArrayList<>();
 		List<Post> myPosts = this.postService.getPostsByUsername(myUsername);
+		
 		for (Post p : myPosts) {
-
+			Set<Person> likers = this.personService.findLikedbyByPostID(p.getId().intValue());
 			results.add(p);
+			model.put("likers", likers);
+			
 		}
 
 		model.put("results", results);
-		return results;
-		// esa seria la idea cada post tiene like y texto y por otra parte sacar los
-		// likers
+		
+		return "posts/myPosts";
+		
 	}
 
 	@GetMapping("/posts/{id}/likers")
