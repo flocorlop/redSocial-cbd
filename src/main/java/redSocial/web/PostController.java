@@ -58,8 +58,8 @@ public class PostController {
 	public String getMyPosts(@RequestBody @PathVariable("myself") String myUsername,
 			final Map<String, Object> model) {
 		// un for de lista con las relaciones que van aparte
-		List<Post> results = new ArrayList<>();
-		List<Post> myPosts = this.postService.getPostsByUsername(myUsername);
+		Set<Post> results = new HashSet<>();
+		Set<Post> myPosts = this.postService.getPostsByUsername(myUsername);
 		
 		for (Post p : myPosts) {
 			Set<Person> likers = this.personService.findLikedbyByPostID(p.getId().intValue());
@@ -74,10 +74,10 @@ public class PostController {
 		
 	}
 
-	@GetMapping("/posts/{id}/likers")
-	public Set<Person> getLikersByPostID(@RequestBody @PathVariable("id") int id) {
-		return personService.findLikedbyByPostID(id);
-	}
+//	@GetMapping("/posts/{id}/likers")
+//	public Set<Person> getLikersByPostID(@RequestBody @PathVariable("id") int id) {
+//		return personService.findLikedbyByPostID(id);
+//	}
 
 	// posts
 	@PostMapping("{myself}/posts/new")
@@ -154,21 +154,52 @@ public class PostController {
 
 	// FILTERS
 	@GetMapping("/posts/filters/likes/{num}")
-	public Post filterPostsNumLikes(@RequestBody @PathVariable("num") int num) {
-		return postService.getPostsByNumLikes(num);
+	public String filterPostsNumLikes(@RequestBody @PathVariable("num") int num,final Map<String, Object> model) {
+		Set<Post> results = this.postService.getPostsByNumLikes(num);
+		
+		for (Post p : results) {
+			Set<Person> likers = this.personService.findLikedbyByPostID(p.getId().intValue());
+		
+			model.put("likers", likers);
+			Person uploadedBy = this.personService.findUploadedbyByPostID(p.getId().intValue());
+			model.put("uploadedBy", uploadedBy);
+			results.add(p);
+		}
+		model.put("results", results);
+		return "posts/filterNumLikes";
 		// los posts que tengan >= a ese numero de likes
 	}
 
 	// SEARCHES
 	@GetMapping("/posts/searchByText/")
-	public Set<Post> searchPostByText(@RequestParam String text) {
-		return postService.searchPostByText(text);
+	public String searchPostByText(@RequestParam String text, final Map<String, Object> model) {
+		Set<Post> results =  this.postService.searchPostByText(text);
+		
+		for (Post p : results) {
+			Set<Person> likers = this.personService.findLikedbyByPostID(p.getId().intValue());
+			results.add(p);
+			model.put("likers", likers);
+			Person uploadedBy = this.personService.findUploadedbyByPostID(p.getId().intValue());
+			model.put("uploadedBy", uploadedBy);
+		}
+		model.put("results", results);
+		return "posts/searchByText";
 
 	}
 
 	@GetMapping("/posts/containsText/")
-	public Set<Post> searchPostContainsText(@RequestParam String text) {
-		return postService.searchPostContainsText(text);
+	public String searchPostContainsText(@RequestParam String text, final Map<String, Object> model) {
+		Set<Post> results = postService.searchPostContainsText(text);
+		 for (Post p : results) {
+				Set<Person> likers = this.personService.findLikedbyByPostID(p.getId().intValue());
+				results.add(p);
+				model.put("likers", likers);
+				Person uploadedBy = this.personService.findUploadedbyByPostID(p.getId().intValue());
+				model.put("uploadedBy", uploadedBy);
+			}
+		 model.put("results", results);
+		 return "posts/containsText";
+				 
 
 	}
 

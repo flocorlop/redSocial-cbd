@@ -16,29 +16,6 @@
 
 </head>
 <body>
-	<%--
-	<h2>Todos los posts:</h2>
-
-	<table id="posts" class="table table-striped">
-
-		<tbody>
-			<c:forEach items="${results}" var="p">
-				<tr>
-					<td>id: <c:out value="${p.id}"></c:out>
-					</td>
-					<td>likes: <c:out value="${p.likes}"></c:out>
-					</td>
-					<td>usuario: <c:out value="${p.uploadedBy.username}"></c:out>
-					</td>
-					<td>texto: <c:out value="${p.text}"></c:out>
-					</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-</body>
-</html>
- --%>
 <body>
 	<div class="team-boxed">
 		<div class="container">
@@ -47,23 +24,30 @@
 				<p class="text-center">Aquí encontrarás todos los posts.</p>
 			</div>
 			<div class="row people">
-			<c:forEach items="${results}" var="p">
-				<div class="col-md-6 col-lg-4 item">
-					<div class="box">
-						<p> <c:out value="${p.id}"></c:out> </p>
-						
-						<h3 class="name">@<c:out value="${p.uploadedBy.username}"></c:out></h3>
-						<p class="title">likes: <c:out value="${p.likes}"></c:out></p>
-						<p class="description"><c:out value="${p.text}"></c:out></p>
-						<div class="social">
-							<a href="#"><i class="fa fa-facebook-official"></i></a><a
-								href="#"><i class="fa fa-twitter"></i></a><a href="#"><i
-								class="fa fa-instagram"></i></a>
+				<c:forEach items="${results}" var="p">
+					<div class="col-md-6 col-lg-4 item">
+						<div class="box">
+							<p>
+								<a class="btn btn-default" href='/fcl/posts/${p.id}/like'> <button type="button" class="btn btn-primary">Like </button></a>
+							</p>
+
+							<h3 class="name">
+								@<c:out value="${p.uploadedBy.username}"></c:out>
+							</h3>
+							<p class="title">
+								likes:
+								<c:out value="${p.likes}"></c:out>
+							</p>
+							<p class="description">
+								<c:out value="${p.text}"></c:out>
+							</p>
+
+							<a class="btn btn-default" href='/posts/${p.id}/'><button type="button" class="btn btn-outline-info" data-mdb-ripple-color="dark"> Detalles </button></a>
+							
 						</div>
 					</div>
-				</div>
 				</c:forEach>
-				
+
 			</div>
 		</div>
 	</div>

@@ -38,19 +38,23 @@ public class RedSocialApplication {
 			Person pe1 = new Person("flor", "correa", "fcl");
 			Person pe2 = new Person("isa", "duran", "idv");
 			Person pe3 = new Person("eva", "romero", "evj");
+			Person pe4 = new Person("lau", "roman", "lrh");
 
 			Set<Person> set1 = new HashSet<Person>();
 			set1.add(pe1);
 			set1.add(pe2);
+			set1.add(pe3);
+			set1.add(pe4);
 
 			Set<Person> set2 = new HashSet<Person>();
 			set2.add(pe2);
+			set2.add(pe4);
 
-			Post po1 = new Post(2, "post 1", set1, pe1);
-			Post po2 = new Post(1, "post 2", set2, pe2);
-			Post po3 = new Post(1, "post 3", set2, pe2);
-			Post po4 = new Post(1, "post 4", set2, pe2);
-			Post po5 = new Post(1, "post 5", set2, pe2);
+			Post po1 = new Post(set1.size(), "post 1", set1, pe1);
+			Post po2 = new Post(set2.size(), "post 2", set2, pe2);
+			Post po3 = new Post(set1.size(), "post 3", set1, pe3);
+			Post po4 = new Post(set2.size(), "post 4", set2, pe4);
+			Post po5 = new Post(set1.size(), "post 5", set1, pe2);
 			postS.savePost(po1);
 			postS.savePost(po2);
 			postS.savePost(po3);
@@ -60,6 +64,7 @@ public class RedSocialApplication {
 			perR.save(pe1);
 			perR.save(pe2);
 			perR.save(pe3);
+			perR.save(pe4);
 		};
 	}
 }

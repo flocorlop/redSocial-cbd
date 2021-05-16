@@ -24,10 +24,10 @@ public class PostService {
 	public Post getPostById(int id) {
 		return postRepository.getPostById(id);
 	}
-	public List<Post> getPostsByUsername(String username) {
-		return (List<Post>) postRepository.getPostsByUsername(username);
+	public Set<Post> getPostsByUsername(String username) {
+		return postRepository.getPostsByUsername(username);
 	}
-	public Post getPostsByNumLikes(int id) {
+	public Set<Post> getPostsByNumLikes(int id) {
 		return postRepository.getPostsByNumLikes(id);
 	}
 	public Set<Post> searchPostByText(String t){

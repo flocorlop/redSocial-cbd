@@ -20,10 +20,10 @@ public interface PostRepository extends Neo4jRepository<Post, Long> {
 	Post getPostById(@Param("id") int id);
 	
 	@Query("MATCH (pe:Person {username: $username}) <-[r1:UPLOADED_BY]-(p:Post) RETURN p")
-	List<Post> getPostsByUsername(@Param("username")String username);
+	Set<Post> getPostsByUsername(@Param("username")String username);
 	
 	@Query("MATCH (p:Post) WHERE p.likes >= $num RETURN p")
-	Post getPostsByNumLikes(@Param("num") int num);
+	Set<Post> getPostsByNumLikes(@Param("num") int num);
 	
 	@Query("MATCH(post:Post) WHERE post.text = $t RETURN post")
     Set<Post> getPostByText(String t);
