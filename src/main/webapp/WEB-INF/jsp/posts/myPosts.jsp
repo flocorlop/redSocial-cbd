@@ -49,6 +49,7 @@
 				</c:forEach>
 
 			</div>
+			<a class="btn btn-default" href='/posts/'> Ver todos los posts</a>
 		</div>
 	</div>
 	<script

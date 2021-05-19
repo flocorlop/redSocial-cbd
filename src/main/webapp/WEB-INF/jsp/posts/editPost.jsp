@@ -18,15 +18,16 @@
 </head>
 	<body>
 
-<h2>HTML Forms</h2>
-
+<h2>Editar el post</h2>
+<p class="m-b-10 f-w-600">Valor antiguo: <c:out value="${post.text}"></c:out></p>
 <form action="/${myself}/posts/${id}/edit" method="post">
   <label for="text">Text:</label><br>
   <input type="text" id="text" name="text" ><br>
   
   <button class="btn btn-default" type="submit">Editar</button>
 </form> 
-
+<a class="btn btn-default"
+		href='<spring:url value="/posts" htmlEscape="true"/>'>Volver</a>
 
 </body>
 </html>

@@ -38,7 +38,7 @@ public class PostController {
 	public String getAllPosts(final Map<String, Object> model) {
 		List<Post> results = this.postService.getPosts();
 		model.put("results", results);
-		
+
 		return "posts/allPosts";
 	}
 
@@ -119,8 +119,23 @@ public class PostController {
 		}
 	}
 
+	@GetMapping(value = "{myself}/posts/{id}/delete") // el cliente quiere cancelar la cita
+	public String deletePost(@PathVariable("myself") String myUsername, @PathVariable("id") int id,
+			final Map<String, Object> model) {
+		Post post = postService.getPostById(id);
+		Person me = personService.findByUsername(myUsername);
+		Person uploadedBy = personService.findUploadedbyByPostID(id);
+
+		if (!me.getUsername().equals(uploadedBy.getUsername())) {
+			return "redirect:/posts/{id}";
+		}
+		model.put("post", post);
+		return "posts/confirmDelete";
+	}
+
 	@PostMapping("{myself}/posts/{id}/delete")
-	public void deletePost(@PathVariable("myself") String myUsername, @PathVariable("id") int id) {
+	public String deletePostC(@PathVariable("myself") String myUsername, @PathVariable("id") int id,
+			final Map<String, Object> model) {
 		Person me = personService.findByUsername(myUsername);
 		Post postLiked = postService.getPostById(id);
 		Person uploadedBy = personService.findUploadedbyByPostID(id);
@@ -132,6 +147,7 @@ public class PostController {
 		} else {
 			System.out.println("no puedes borrar el post que no es tuyo");
 		}
+		return "redirect:/posts";
 	}
 
 	@PostMapping("{myself}/posts/{id}/like")
@@ -171,8 +187,8 @@ public class PostController {
 	}
 
 	// FILTERS
-	@GetMapping("/posts/filters/likes/{num}")
-	public String filterPostsNumLikes(@RequestBody @PathVariable("num") int num, final Map<String, Object> model) {
+	@GetMapping("/posts/filters/likes/")
+	public String filterPostsNumLikes(@RequestParam int num, final Map<String, Object> model) {
 		Set<Post> results = this.postService.getPostsByNumLikes(num);
 
 		for (Post p : results) {
