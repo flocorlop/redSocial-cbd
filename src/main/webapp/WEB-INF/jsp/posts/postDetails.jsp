@@ -25,7 +25,7 @@
 							<div class="col-sm-4 bg-c-lite-green user-profile">
 								<div class="card-block text-center text-white">
 									<div class="m-b-25">
-										<img src="https://img-premium.flaticon.com/png/512/747/747376.png?token=exp=1621188987~hmac=a69c01f739764f88be3b7e75a2482fe3"
+										<img src="https://cdn.onlinewebfonts.com/svg/img_227642.png"
 											class="img-radius" alt="User-Profile-Image" width=60%>
 									</div>
 									<h3 class="f-w-600">
@@ -65,23 +65,10 @@
 										</div>
 										
 									</div>
-									<!-- <ul class="social-link list-unstyled m-t-40 m-b-10">
-										<li><a href="#!" data-toggle="tooltip"
-											data-placement="bottom" title=""
-											data-original-title="facebook" data-abc="true"><i
-												class="mdi mdi-facebook feather icon-facebook facebook"
-												aria-hidden="true"></i></a></li>
-										<li><a href="#!" data-toggle="tooltip"
-											data-placement="bottom" title=""
-											data-original-title="twitter" data-abc="true"><i
-												class="mdi mdi-twitter feather icon-twitter twitter"
-												aria-hidden="true"></i></a></li>
-										<li><a href="#!" data-toggle="tooltip"
-											data-placement="bottom" title=""
-											data-original-title="instagram" data-abc="true"><i
-												class="mdi mdi-instagram feather icon-instagram instagram"
-												aria-hidden="true"></i></a></li>
-									</ul> -->
+									<c:if test="${check == true}" >
+									<a class="btn btn-default" href='/fcl/posts/${p.id}/edit'><button type="button" class="btn btn-outline-info" data-mdb-ripple-color="dark"> Editar </button></a>
+							
+									</c:if>
 								</div>
 							</div>
 						</div>

@@ -35,4 +35,11 @@ public class PersonService {
 		return personRepository.findLikedbyByPostID(id);
 		
 	}
+	
+	public Integer findPIdByUsername(@Param("personUsername")String personUsername)  {
+		return this.personRepository.findPIdByUsername(personUsername);
+	}
+	public Person findPById(@Param("id")int  id)  {
+		return this.personRepository.findPById(id);
+	}
 }

@@ -37,7 +37,7 @@ public class RedSocialApplication {
 
 			Person pe1 = new Person("flor", "correa", "fcl");
 			Person pe2 = new Person("isa", "duran", "idv");
-			Person pe3 = new Person("eva", "romero", "evj");
+			Person pe3 = new Person("eva", "romero", "erj");
 			Person pe4 = new Person("lau", "roman", "lrh");
 
 			Set<Person> set1 = new HashSet<Person>();

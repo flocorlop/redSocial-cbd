@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
 import redSocial.model.Person;
 import redSocial.model.Post;
 import redSocial.service.PersonService;
@@ -35,11 +33,12 @@ public class PostController {
 		this.personService = personService;
 	}
 
-	// gets
+	// @gets
 	@GetMapping("/posts")
 	public String getAllPosts(final Map<String, Object> model) {
 		List<Post> results = this.postService.getPosts();
 		model.put("results", results);
+		
 		return "posts/allPosts";
 	}
 
@@ -56,31 +55,20 @@ public class PostController {
 	}
 
 	@GetMapping("{myself}/my-posts")
-	public String getMyPosts(@RequestBody @PathVariable("myself") String myUsername,
-			final Map<String, Object> model) {
-		// un for de lista con las relaciones que van aparte
+	public String getMyPosts(@RequestBody @PathVariable("myself") String myUsername, final Map<String, Object> model) {
 		Set<Post> results = new HashSet<>();
 		Set<Post> myPosts = this.postService.getPostsByUsername(myUsername);
-		
 		for (Post p : myPosts) {
 			Set<Person> likers = this.personService.findLikedbyByPostID(p.getId().intValue());
 			results.add(p);
 			model.put("likers", likers);
-			
 		}
 
 		model.put("results", results);
-		
 		return "posts/myPosts";
-		
 	}
 
-//	@GetMapping("/posts/{id}/likers")
-//	public Set<Person> getLikersByPostID(@RequestBody @PathVariable("id") int id) {
-//		return personService.findLikedbyByPostID(id);
-//	}
-
-	// posts
+	// @posts
 	@PostMapping("{myself}/posts/new")
 	public Post postPost(@RequestBody @Valid Post p, @PathVariable("myself") String myUsername) {
 		Person me = personService.findByUsername(myUsername);
@@ -93,22 +81,24 @@ public class PostController {
 		return this.postService.savePost(p);
 
 	}
-	
-	@GetMapping(value = "{myself}/posts/{id}/edit") // el mecanico quiere actualizar cita
+
+	@GetMapping(value = "{myself}/posts/{id}/edit") //
 	public String initUpdatePost(@PathVariable("myself") String myUsername, @PathVariable("id") int id,
 			final ModelMap model) {
 		Post postLiked = postService.getPostById(id);
 		model.addAttribute(postLiked);
 		Person uploadedBy = personService.findUploadedbyByPostID(id);
-
-		if (!(myUsername.equals(uploadedBy.getUsername()))) { // comprobar que no es otro mecanico que quiere acceder
-			return "exception";
+		boolean check = myUsername.equals(uploadedBy.getUsername());
+		model.put("check", check);
+		if (!(check)) { //
+			return "error/403";
 		}
 		return "posts/editPost";
 	}
+
 	@PostMapping("{myself}/posts/{id}/edit")
-	public String editPost(@Valid final Post p, @PathVariable("myself") String myUsername,
-			@PathVariable("id") int id, final Map<String, Object> model, final BindingResult result) {
+	public String editPost(@Valid final Post p, @PathVariable("myself") String myUsername, @PathVariable("id") int id,
+			final Map<String, Object> model, final BindingResult result) {
 		Person me = personService.findByUsername(myUsername);
 		Post postLiked = postService.getPostById(id);
 		Person uploadedBy = personService.findUploadedbyByPostID(id);
@@ -125,7 +115,7 @@ public class PostController {
 			return "redirect:/posts/";
 		} else {
 			System.out.println("no puedes editar el post que no es tuyo");
-			return "posts/editPost";
+			return "error/403";
 		}
 	}
 
@@ -151,34 +141,43 @@ public class PostController {
 		Person uploadedBy = personService.findUploadedbyByPostID(id);
 		Set<Person> likers = personService.findLikedbyByPostID(id);
 
-		System.out.println("likes anteriores" + postLiked.getLikes() + ", " + likers +"yo:" +me);
+		Set<String> listaAux = new HashSet<>();
+		System.out.println("likes anteriores" + postLiked.getLikes() + ", " + likers + "yo:" + me);
+		for (Person p : likers) {
+			listaAux.add(p.getUsername());
+		}
+		if (listaAux.contains(me.getUsername())) {
+			System.out.println("ya le ha dado mg");
+			System.out.println("lista aux:" + listaAux);
+			return "redirect:/posts/";
+		}
 		if (likers == null) {
 			likers = new HashSet<>();
 			likers.add(me);
 			postLiked.setLikedBy(likers);
-		}else {
+		} else {
 			likers.add(me);
 			postLiked.setLikedBy(likers);
 			postLiked.setLikes(postLiked.getLikes() + 1);
-			postLiked.setUploadedBy(uploadedBy);
-			
-			
-			System.out.println("me gusta dado, ahora tiene:" + postLiked.getLikes() + " lista: " + likers + ", subido por: "
-					+ postLiked.getUploadedBy());
+
 		}
-		
+		postLiked.setUploadedBy(uploadedBy);
+
+		System.out.println("me gusta dado, ahora tiene:" + postLiked.getLikes() + " lista: " + likers + ", subido por: "
+				+ postLiked.getUploadedBy());
 		postService.savePost(postLiked);
 		return "redirect:/posts/";
+
 	}
 
 	// FILTERS
 	@GetMapping("/posts/filters/likes/{num}")
-	public String filterPostsNumLikes(@RequestBody @PathVariable("num") int num,final Map<String, Object> model) {
+	public String filterPostsNumLikes(@RequestBody @PathVariable("num") int num, final Map<String, Object> model) {
 		Set<Post> results = this.postService.getPostsByNumLikes(num);
-		
+
 		for (Post p : results) {
 			Set<Person> likers = this.personService.findLikedbyByPostID(p.getId().intValue());
-		
+
 			model.put("likers", likers);
 			Person uploadedBy = this.personService.findUploadedbyByPostID(p.getId().intValue());
 			model.put("uploadedBy", uploadedBy);
@@ -192,8 +191,8 @@ public class PostController {
 	// SEARCHES
 	@GetMapping("/posts/searchByText/")
 	public String searchPostByText(@RequestParam String text, final Map<String, Object> model) {
-		Set<Post> results =  this.postService.searchPostByText(text);
-		
+		Set<Post> results = this.postService.searchPostByText(text);
+
 		for (Post p : results) {
 			Set<Person> likers = this.personService.findLikedbyByPostID(p.getId().intValue());
 			results.add(p);
@@ -209,16 +208,15 @@ public class PostController {
 	@GetMapping("/posts/containsText/")
 	public String searchPostContainsText(@RequestParam String text, final Map<String, Object> model) {
 		Set<Post> results = postService.searchPostContainsText(text);
-		 for (Post p : results) {
-				Set<Person> likers = this.personService.findLikedbyByPostID(p.getId().intValue());
-				results.add(p);
-				model.put("likers", likers);
-				Person uploadedBy = this.personService.findUploadedbyByPostID(p.getId().intValue());
-				model.put("uploadedBy", uploadedBy);
-			}
-		 model.put("results", results);
-		 return "posts/containsText";
-				 
+		for (Post p : results) {
+			Set<Person> likers = this.personService.findLikedbyByPostID(p.getId().intValue());
+			results.add(p);
+			model.put("likers", likers);
+			Person uploadedBy = this.personService.findUploadedbyByPostID(p.getId().intValue());
+			model.put("uploadedBy", uploadedBy);
+		}
+		model.put("results", results);
+		return "posts/containsText";
 
 	}
 

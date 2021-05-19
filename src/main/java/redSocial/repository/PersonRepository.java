@@ -24,4 +24,10 @@ public interface PersonRepository extends Neo4jRepository<Person, Long> {
 	
 	@Query("MATCH (pe:Person) <-[r1:LIKED_BY]-(p:Post) WHERE ID(p) = $id RETURN pe")
 	Set<Person> findLikedbyByPostID(@Param("id")int  id);
+	
+	@Query("MATCH (n:Person) where n.username = $personUsername return ID(n)")
+	Integer findPIdByUsername(@Param("username") String personUsername);
+	
+	@Query("match (n:Person) where ID(n) = $id return p")
+	Person findPById(@Param("id")int id);
 }
