@@ -1,16 +1,23 @@
-<%@ page session="false" trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 
-<cheapy:layout pageName="Acceso Denegado">
-	<h2 class="text-center" style="font-family: 'Lobster'; font-size: 30px; color: rgb(0, 64, 128); padding:30px"><em>No dispone de las credenciales necesarias para poder acceder a esta p√°gina.</em></h2>
-    
-    <spring:url value="/resources/images/Logo Cheapy.png" htmlEscape="true" var="cheapyImage"/>
-    <img class="img-responsive" src="${fn:escapeXml(cheapyImage)}"/>
 
-    <p>${fn:escapeXml(exception.message)}</p>
-	
-</cheapy:layout>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Mini Red Social</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+</head>
+
+<body>
+<h1> No tiene permiso para acceder a esta p·gina</h1>
+</body>
+</html>

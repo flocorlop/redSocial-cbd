@@ -17,6 +17,24 @@
 </head>
 <body>
 <body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container">
+			<a class="navbar-brand" href="#!">Mini Red Social</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a class="nav-link" href="/">Home<span
+							class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
 	<div class="team-boxed">
 		<div class="container">
 			<div class="intro">
@@ -27,14 +45,15 @@
 				<c:forEach items="${results}" var="p">
 					<div class="col-md-6 col-lg-4 item">
 						<div class="box">
-						
-							<form action ="/fcl/posts/${p.id}/like"  method="post">
-							<button type="submit" class="btn btn-primary" >Like </button>
+
+							<form action="/fcl/posts/${p.id}/like" method="post">
+								<button type="submit" class="btn btn-primary">Like</button>
 							</form>
-							
+
 
 							<h3 class="name">
-								@<c:out value="${p.uploadedBy.username}"></c:out>
+								@
+								<c:out value="${p.uploadedBy.username}"></c:out>
 							</h3>
 							<p class="title">
 								likes:
@@ -44,8 +63,10 @@
 								<c:out value="${p.text}"></c:out>
 							</p>
 
-							<a class="btn btn-default" href='/posts/${p.id}/'><button type="button" class="btn btn-outline-info" data-mdb-ripple-color="dark"> Detalles </button></a>
-							
+							<a class="btn btn-default" href='/posts/${p.id}/'><button
+									type="button" class="btn btn-outline-info"
+									data-mdb-ripple-color="dark">Detalles</button></a>
+
 						</div>
 					</div>
 				</c:forEach>

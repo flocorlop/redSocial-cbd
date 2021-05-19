@@ -112,7 +112,7 @@ public class PostController {
 			postLiked.setLikedBy(likers);
 			postService.savePost(postLiked);
 			System.out.println("texto ahora: " + postLiked.getText());
-			return "redirect:/posts/";
+			return "redirect:/posts";
 		} else {
 			System.out.println("no puedes editar el post que no es tuyo");
 			return "error/403";

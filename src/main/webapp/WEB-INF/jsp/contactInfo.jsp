@@ -1,94 +1,64 @@
-<%@ page session="false" trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!DOCTYPE html>
+<html lang="es">
 
-<style>
-.fa {
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
-  text-decoration: none;
-  margin: 5px 2px;
-  border-radius: 50%;
-}
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Mini Red Social</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+</head>
 
-.column-info {
-  float: left;
-  width: 25%;
-  margin-top: 6px;
-  padding: 20px;
-  text-align: center;
-}
-
-.row-info:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.landingPage {
-	height: 80px;
-}
-
-.barImage {
-	width: 60%;
-}
-</style>
-
-<cheapy:layout pageName="contactInfo">
-
-    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px; margin-bottom:20px;">InformaciÃ³n de contacto</h2>
-    <p style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: #325a80; padding:10px; margin-bottom:20px;">
-    Â¿Tienes alguna duda? Puedes hacÃ©rnosla llegar a travÃ©s de los siguientes medios:</p>
-    
-    <div style="text-align: center;">
-    	<img src="/resources/images/bar2-CI.png" class = "barImage" style="border-radius: 8px;">
-    </div>
-    
-
-	<div class="row-info">
-	    <div class="column-info">
-	    	<a href="https://twitter.com/cheapyispp" target="_blank" class="fa fa-twitter"></a>
-	    	<p><b>@cheapyispp</b></p>
-	    	â€‹
-	    </div>
-	    <div class="column-info">
-	    	<a href="https://www.instagram.com/cheapyispp/" target="_blank" class="fa fa-instagram"></a>
-	    	<p><b>@cheapyispp</b></p>â€‹
-	    </div>
-	    <div class="column-info">
-	    	<a href="mailto:cheapy.ispp@gmail.com" target="_blank" class="fa fa-envelope"></a>
-	    	<p><b>cheapy.ispp@gmail.com</b></p>
-	    	â€‹
-	    </div>
-	    <div class="column-info">
-	    	<a href="https://github.com/cheapy-ispp" target="_blank" class="fa fa-github"></a>
-	    	<p><b>cheapy-ispp</b></p>
-	    	â€‹
-	    </div>
-	    <!--
-	    <div class="column">
-	    	<a href="https://cheapy-ispp.github.io/landing-page/" class=""><img src="/resources/images/Logo Cheapy LP.png" class = "landingPage"></a>
-	    	<p><b>Landing Page</b></p>
-	    </div>
-	    -->
+<body>
+	<!-- Navigation-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container">
+			<a class="navbar-brand" href="#!">Mini Red Social</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a class="nav-link" href="/">Home<span
+							class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="about">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- Page Content-->
+	<div class="container">
+		<!-- Jumbotron Header-->
+		<header class="jumbotron my-4">
+			<h1 class="display-3">Complemento de base de datos</h1>
+			<h2 class="display-10">Grado en Ingeniería Informática-Ingeniería del Software</h2>
+			<p class="lead">Tranajo realizado por Florentina Correa López y Juan José León Valderrama</p>
+			<!-- 			<a class="btn btn-primary btn-lg" href="/posts">Ver posts</a> -->
+		</header>
+		
 	</div>
-	
+	<!-- Footer-->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright © 2021</p>
+		</div>
+	</footer>
+	<!-- Bootstrap core JS-->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
+</body>
 
-
-  	
-
-</cheapy:layout>
+</html>

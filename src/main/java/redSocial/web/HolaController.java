@@ -11,4 +11,9 @@ public class HolaController {
 		
 		return "welcome";
 	}
+	@RequestMapping("/about")
+	public String about() {
+		
+		return "contactInfo";
+	}
 }
