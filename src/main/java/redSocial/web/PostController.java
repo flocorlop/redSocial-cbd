@@ -1,6 +1,5 @@
 package redSocial.web;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +7,8 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -92,10 +93,22 @@ public class PostController {
 		return this.postService.savePost(p);
 
 	}
+	
+	@GetMapping(value = "{myself}/posts/{id}/edit") // el mecanico quiere actualizar cita
+	public String initUpdatePost(@PathVariable("myself") String myUsername, @PathVariable("id") int id,
+			final ModelMap model) {
+		Post postLiked = postService.getPostById(id);
+		model.addAttribute(postLiked);
+		Person uploadedBy = personService.findUploadedbyByPostID(id);
 
+		if (!(myUsername.equals(uploadedBy.getUsername()))) { // comprobar que no es otro mecanico que quiere acceder
+			return "exception";
+		}
+		return "posts/editPost";
+	}
 	@PostMapping("{myself}/posts/{id}/edit")
-	public void editPost(@RequestBody @Valid Post p, @PathVariable("myself") String myUsername,
-			@PathVariable("id") int id) {
+	public String editPost(@Valid final Post p, @PathVariable("myself") String myUsername,
+			@PathVariable("id") int id, final Map<String, Object> model, final BindingResult result) {
 		Person me = personService.findByUsername(myUsername);
 		Post postLiked = postService.getPostById(id);
 		Person uploadedBy = personService.findUploadedbyByPostID(id);
@@ -109,8 +122,10 @@ public class PostController {
 			postLiked.setLikedBy(likers);
 			postService.savePost(postLiked);
 			System.out.println("texto ahora: " + postLiked.getText());
+			return "redirect:/posts/";
 		} else {
 			System.out.println("no puedes editar el post que no es tuyo");
+			return "posts/editPost";
 		}
 	}
 
@@ -130,26 +145,30 @@ public class PostController {
 	}
 
 	@PostMapping("{myself}/posts/{id}/like")
-	public void likePost(@PathVariable("myself") String myUsername, @PathVariable("id") int id) {
+	public String likePost(@PathVariable("myself") String myUsername, @PathVariable("id") int id) {
 		Person me = personService.findByUsername(myUsername);
 		Post postLiked = postService.getPostById(id);
 		Person uploadedBy = personService.findUploadedbyByPostID(id);
 		Set<Person> likers = personService.findLikedbyByPostID(id);
 
-		System.out.println("likes anteriores" + postLiked.getLikes() + ", " + likers);
+		System.out.println("likes anteriores" + postLiked.getLikes() + ", " + likers +"yo:" +me);
 		if (likers == null) {
 			likers = new HashSet<>();
 			likers.add(me);
 			postLiked.setLikedBy(likers);
-		} else {
+		}else {
 			likers.add(me);
 			postLiked.setLikedBy(likers);
+			postLiked.setLikes(postLiked.getLikes() + 1);
+			postLiked.setUploadedBy(uploadedBy);
+			
+			
+			System.out.println("me gusta dado, ahora tiene:" + postLiked.getLikes() + " lista: " + likers + ", subido por: "
+					+ postLiked.getUploadedBy());
 		}
-		postLiked.setUploadedBy(uploadedBy);
-		postLiked.setLikes(postLiked.getLikes() + 1);
+		
 		postService.savePost(postLiked);
-		System.out.println("me gusta dado, ahora tiene:" + postLiked.getLikes() + " lista: " + likers + ", subido por: "
-				+ postLiked.getUploadedBy());
+		return "redirect:/posts/";
 	}
 
 	// FILTERS

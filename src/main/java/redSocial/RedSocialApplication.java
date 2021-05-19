@@ -49,11 +49,13 @@ public class RedSocialApplication {
 			Set<Person> set2 = new HashSet<Person>();
 			set2.add(pe2);
 			set2.add(pe4);
-
+			
+			Set<Person> setV = new HashSet<Person>();
+			
 			Post po1 = new Post(set1.size(), "post 1", set1, pe1);
-			Post po2 = new Post(set2.size(), "post 2", set2, pe2);
-			Post po3 = new Post(set1.size(), "post 3", set1, pe3);
-			Post po4 = new Post(set2.size(), "post 4", set2, pe4);
+			Post po2 = new Post(setV.size(), "post 2", setV, pe2);
+			Post po3 = new Post(setV.size(), "post 3", setV, pe3);
+			Post po4 = new Post(setV.size(), "post 4", setV, pe4);
 			Post po5 = new Post(set1.size(), "post 5", set1, pe2);
 			postS.savePost(po1);
 			postS.savePost(po2);

@@ -27,9 +27,11 @@
 				<c:forEach items="${results}" var="p">
 					<div class="col-md-6 col-lg-4 item">
 						<div class="box">
-							<p>
-								<a class="btn btn-default" href='/fcl/posts/${p.id}/like'> <button type="button" class="btn btn-primary">Like </button></a>
-							</p>
+						
+							<form action ="/fcl/posts/${p.id}/like"  method="post">
+							<button type="submit" class="btn btn-primary" >Like </button>
+							</form>
+							
 
 							<h3 class="name">
 								@<c:out value="${p.uploadedBy.username}"></c:out>
