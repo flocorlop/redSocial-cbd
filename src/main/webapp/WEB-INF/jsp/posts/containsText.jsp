@@ -17,7 +17,7 @@
 </head>
 <body>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container">
 			<a class="navbar-brand" href="#!">Mini Red Social</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -45,7 +45,9 @@
 					<div class="col-md-6 col-lg-4 item">
 						<div class="box">
 							<p>
-								<a class="btn btn-default" href='/fcl/posts/${p.id}/like'> <button type="button" class="btn btn-primary">Like </button></a>
+								<form action="/fcl/posts/${p.id}/like" method="post">
+									<button type="submit" class="btn btn-primary">Like</button>
+								</form>
 							</p>
 
 							<h3 class="name">
@@ -58,14 +60,16 @@
 							<p class="description">
 								<c:out value="${p.text}"></c:out>
 							</p>
-							<a class="btn btn-default" href='/posts/${p.id}/'><button type="button" class="btn btn-outline-info" data-mdb-ripple-color="dark"> Detalles </button></a>
+							<a class="btn btn-default" href='/posts/${p.id}/'><button
+									type="button" class="btn btn-outline-info"
+									data-mdb-ripple-color="dark"> Detalles </button></a>
 							
 						</div>
 					</div>
 				</c:forEach>
 
 			</div>
-			<a class="btn btn-default" href='/posts/'> Ver todos los posts</a>
+			<a class="btn btn-primary" href='/posts/'> Ver todos los posts</a>
 		</div>
 	</div>
 	<script

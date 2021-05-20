@@ -56,15 +56,15 @@ public class PostController {
 
 	@GetMapping("{myself}/my-posts")
 	public String getMyPosts(@RequestBody @PathVariable("myself") String myUsername, final Map<String, Object> model) {
-		Set<Post> results = new HashSet<>();
+		//Set<Post> results = new HashSet<>();
 		Set<Post> myPosts = this.postService.getPostsByUsername(myUsername);
-		for (Post p : myPosts) {
-			Set<Person> likers = this.personService.findLikedbyByPostID(p.getId().intValue());
-			results.add(p);
-			model.put("likers", likers);
-		}
+//		for (Post p : myPosts) {
+//			Set<Person> likers = this.personService.findLikedbyByPostID(p.getId().intValue());
+//			results.add(p);
+//			model.put("likers", likers);
+//		}
 
-		model.put("results", results);
+		model.put("results", myPosts);
 		return "posts/myPosts";
 	}
 
@@ -160,7 +160,7 @@ public class PostController {
 	}
 
 	@PostMapping("{myself}/posts/{id}/like")
-	public String likePost(@PathVariable("myself") String myUsername, @PathVariable("id") int id) {
+	public String likePost(@PathVariable("myself") String myUsername, @PathVariable("id") int id, final Map<String, Object> model) {
 		Person me = personService.findByUsername(myUsername);
 		Post postLiked = postService.getPostById(id);
 		Person uploadedBy = personService.findUploadedbyByPostID(id);
@@ -174,6 +174,7 @@ public class PostController {
 		if (listaAux.contains(me.getUsername())) {
 			System.out.println("ya le ha dado mg");
 			System.out.println("lista aux:" + listaAux);
+			
 			return "redirect:/posts/";
 		}
 		if (likers == null) {

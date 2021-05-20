@@ -84,14 +84,14 @@
 									</div>
 									<a class="btn btn-default" href='/fcl/posts/${post.id}/edit'><button type="button" class="btn btn-outline-info" data-mdb-ripple-color="dark"> Editar </button></a>
 							
-									<a class="btn btn-default" href='/fcl/posts/${post.id}/delete'><button type="button" class="btn btn-outline-info" data-mdb-ripple-color="dark"> Borrar </button></a>
+									<a class="btn btn-default" href='/fcl/posts/${post.id}/delete'><button type="button" class="btn btn-outline-danger" data-mdb-ripple-color="dark"> Borrar </button></a>
 							
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div> <a class="btn btn-default" href='/posts/'> Ver todos los posts</a>
+			</div> <a class="btn btn-primary" href='/posts/'> Ver todos los posts</a>
 		</div>
 	</div>
 </body>

@@ -22,7 +22,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container">
 			<a class="navbar-brand" href="#!">Mini Red Social</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -45,14 +45,13 @@
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<form action="/fcl/posts/${p.id}/delete" method="post">
-					<button type="submit" class="btn btn-primary">Borrar post
-					</button>
+					<button type="submit" class="btn btn-outline-danger">Borrar
+						post</button>
 				</form>
 			</div>
 		</div>
 	</form:form>
-	<a class="btn btn-default"
-		href='<spring:url value="/posts" htmlEscape="true"/>'>Volver</a>
+	<a class="btn btn-primary" href='/'>Cancelar</a>
 
 </body>
 </html>

@@ -35,17 +35,56 @@
 		</div>
 	</nav>
 	<h2>Nuevo post</h2>
+	<div class="page-content page-container" id="page-content">
+		<div class="padding">
+			<div class="row container d-flex justify-content-center">
+				<div class="col-xl-10">
+					<div class="card user-card-full">
+						<div class="row m-l-0 m-r-0">
+							<div class="col-sm-4 bg-c-lite-green user-profile">
+								<div class="card-block text-center text-white">
+									<div class="m-b-25">
+										<img src="https://cdn.onlinewebfonts.com/svg/img_227642.png"
+											class="img-radius" alt="User-Profile-Image" width=60%>
+									</div>
+									<h3 class="f-w-600">
+										@
+										<c:out value="${myself}"></c:out>
+									</h3>
+									<!-- 									<p>Web Designer</p> -->
+									<i
+										class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+								</div>
+							</div>
+							<div class="col-sm-8">
+								<div class="card-block">
+									<h4 class="m-b-20 p-b-5 b-b-default f-w-600">Contenido</h4>
+									<div class="row">
+										<div class="col-sm-10">
+											<div class="m-b-10 f-w-600">
+												<form action="/${myself}/posts/new" method="post">
+													<div class="form-group">
+														<label for="text">Texto:</label><br>
+														<textarea class="form-control" id="text" name="text"> </textarea>
+														<br>
 
-	<form action="/${myself}/posts/new" method="post">
-		<div class="form-group">
-			<label for="text">Text:</label><br>
-			<textarea class="form-control" id="text" name="text"> </textarea>
-			<br>
+														<button class="btn btn-outline-success" type="submit">Crear</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
 
-			<button class="btn btn-default" type="submit">Crear</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a class="btn btn-primary" href='/posts/'>Cancelar, ver todos los posts</a>
 		</div>
-	</form>
-	<a class="btn btn-default" href='/posts/'> Ver todos los posts</a>
+	</div>
+
 
 </body>
 </html>

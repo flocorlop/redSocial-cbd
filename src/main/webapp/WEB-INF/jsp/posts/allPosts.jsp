@@ -40,17 +40,18 @@
 			<div class="intro">
 				<h2 class="text-center">Posts</h2>
 				<p class="text-center">Aquí encontrarás todos los posts.</p>
-				<a class="btn btn-primary btn-lg btn-block" href="/fcl/posts/new">Crear un post</a> <br>
+				<a class="btn btn-primary btn-lg btn-block" href="/fcl/posts/new">Crear
+					un post</a> <br>
+					<a class="btn btn-primary btn-lg btn-block" href="/fcl/my-posts/">Mis posts</a> <br>
 			</div>
 			<div class="row people">
 				<c:forEach items="${results}" var="p">
 					<div class="col-md-6 col-lg-4 item">
 						<div class="box">
-
-							<form action="/fcl/posts/${p.id}/like" method="post">
-								<button type="submit" class="btn btn-primary">Like</button>
-							</form>
-
+							
+								<form action="/fcl/posts/${p.id}/like" method="post">
+									<button type="submit" class="btn btn-primary">Like</button>
+								</form>
 
 							<h3 class="name">
 								@

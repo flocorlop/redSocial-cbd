@@ -44,7 +44,7 @@
 					<div class="col-md-6 col-lg-4 item">
 						<div class="box">
 							<p>
-								<c:out value="${p.id}"></c:out>
+								ID: <c:out value="${p.id}"></c:out>
 							</p>
 
 							<h3 class="name">
@@ -54,11 +54,11 @@
 								Likes:
 								<c:out value="${p.likes}"></c:out>
 							</p>
-							<p class="description"> Likers:
+							<%-- <p class="description"> Likers:
 								<c:forEach items="${likers}" var="l">
 									@<c:out value="${l.username}"> </c:out>
 								</c:forEach>
-							</p>
+							</p> --%>
 							<a class="btn btn-default" href='/posts/${p.id}/'><button type="button" class="btn btn-outline-info" data-mdb-ripple-color="dark"> Detalles </button></a>
 							
 						</div>
@@ -66,7 +66,7 @@
 				</c:forEach>
 
 			</div>
-			<a class="btn btn-default" href='/posts/'> Ver todos los posts</a>
+			<a class="btn btn-primary" href='/posts/'> Ver todos los posts</a>
 		</div>
 	</div>
 	<script
