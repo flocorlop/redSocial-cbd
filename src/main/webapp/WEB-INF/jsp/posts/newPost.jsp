@@ -1,8 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<link href="<c:url value="/resources/css/style2.css" />"
+<link href="<c:url value="/resources/css/style3.css" />"
 	rel="stylesheet">
 <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
 <script src="<c:url value="/resources/js/main.js" />"></script>
@@ -15,7 +16,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container">
@@ -34,51 +34,18 @@
 			</div>
 		</div>
 	</nav>
+	<h2>Nuevo post</h2>
 
-	<div class="team-boxed">
-		<div class="container">
-			<div class="intro">
-				<h2 class="text-center">Posts</h2>
-				<p class="text-center">Aquí encontrarás todos los posts.</p>
-				<a class="btn btn-primary btn-lg btn-block" href="/fcl/posts/new">Crear un post</a> <br>
-			</div>
-			<div class="row people">
-				<c:forEach items="${results}" var="p">
-					<div class="col-md-6 col-lg-4 item">
-						<div class="box">
+	<form action="/${myself}/posts/new" method="post">
+		<div class="form-group">
+			<label for="text">Text:</label><br>
+			<textarea class="form-control" id="text" name="text"> </textarea>
+			<br>
 
-							<form action="/fcl/posts/${p.id}/like" method="post">
-								<button type="submit" class="btn btn-primary">Like</button>
-							</form>
-
-
-							<h3 class="name">
-								@
-								<c:out value="${p.uploadedBy.username}"></c:out>
-							</h3>
-							<p class="title">
-								likes:
-								<c:out value="${p.likes}"></c:out>
-							</p>
-							<p class="description">
-								<c:out value="${p.text}"></c:out>
-							</p>
-
-							<a class="btn btn-default" href='/posts/${p.id}/'><button
-									type="button" class="btn btn-outline-info"
-									data-mdb-ripple-color="dark">Detalles</button></a>
-
-						</div>
-					</div>
-				</c:forEach>
-
-			</div>
+			<button class="btn btn-default" type="submit">Crear</button>
 		</div>
-	</div>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-</body>
+	</form>
+	<a class="btn btn-default" href='/posts/'> Ver todos los posts</a>
 
+</body>
 </html>

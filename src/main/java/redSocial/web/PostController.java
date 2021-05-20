@@ -69,8 +69,15 @@ public class PostController {
 	}
 
 	// @posts
+	@GetMapping(value = "/{myself}/posts/new") // el cliente escoje el vehiculo para crear una cita del vehiculo
+	public String newPost(@PathVariable("myself") String myUsername, final Map<String, Object> model) {
+		Post p = new Post();
+		model.put("p", p);
+		return "posts/newPost";
+	}
+
 	@PostMapping("{myself}/posts/new")
-	public Post postPost(@RequestBody @Valid Post p, @PathVariable("myself") String myUsername) {
+	public String postNewPost( @Valid final Post p, @PathVariable("myself") String myUsername, final Map<String, Object> model, final BindingResult result) {
 		Person me = personService.findByUsername(myUsername);
 		Set<Person> set = new HashSet<Person>();
 		p.setLikedBy(set);
@@ -78,8 +85,9 @@ public class PostController {
 		System.out.println("Nuevo post: likes " + p.getLikes() + ",texto " + p.getText() + ",gustado " + p.getLikedBy()
 				+ ",subido por " + p.getUploadedBy().getUsername());
 
-		return this.postService.savePost(p);
-
+		this.postService.savePost(p);
+		return "redirect:/posts";
+// -------------------------------------------TOOOOOOOO DOOOOOOOO JSP--------------------------------
 	}
 
 	@GetMapping(value = "{myself}/posts/{id}/edit") //
@@ -127,7 +135,7 @@ public class PostController {
 		Person uploadedBy = personService.findUploadedbyByPostID(id);
 
 		if (!me.getUsername().equals(uploadedBy.getUsername())) {
-			return "redirect:/posts/{id}";
+			return "error/403";
 		}
 		model.put("post", post);
 		return "posts/confirmDelete";
@@ -146,6 +154,7 @@ public class PostController {
 			System.out.println("borrado el post");
 		} else {
 			System.out.println("no puedes borrar el post que no es tuyo");
+			return "error/403";
 		}
 		return "redirect:/posts";
 	}

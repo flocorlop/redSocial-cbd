@@ -46,10 +46,14 @@
 			<a class="btn btn-primary btn-lg" href="/posts">Ver posts</a>
 		</header>
 		<!-- Page Features-->
+		<a class="btn btn-primary btn-lg btn-block" href="/fcl/posts/new">Crear
+			un post</a> <br>
 		<div class="row text-center">
+
 			<div class="col-lg-4 col-md-6 mb-4">
+
 				<div class="card h-100">
-					
+
 					<div class="card-body">
 						<h4 class="card-title">Filtro por número de likes</h4>
 						<p class="card-text">Aparecerán los posts que tengan mayor
@@ -67,7 +71,7 @@
 			</div>
 			<div class="col-lg-4 col-md-6 mb-4">
 				<div class="card h-100">
-					
+
 					<div class="card-body">
 						<h4 class="card-title">Búsqueda por texto</h4>
 						<p class="card-text">Aparecerán los posts que coincidan el
@@ -85,10 +89,11 @@
 			</div>
 			<div class="col-lg-4 col-md-6 mb-4">
 				<div class="card h-100">
-					
+
 					<div class="card-body">
 						<h4 class="card-title">Búsqueda que contenga alguna palabra</h4>
-						<p class="card-text">Aparecerán los posts que contengan alguna palabra en la descripción de los posts.</p>
+						<p class="card-text">Aparecerán los posts que contengan alguna
+							palabra en la descripción de los posts.</p>
 					</div>
 					<div class="card-footer">
 						<form action="/posts/containsText/" method="get">
@@ -100,7 +105,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 	<!-- Footer-->

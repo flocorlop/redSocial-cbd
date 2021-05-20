@@ -42,8 +42,7 @@
   
   <button class="btn btn-default" type="submit">Editar</button>
 </form> 
-<a class="btn btn-default"
-		href='<spring:url value="/posts" htmlEscape="true"/>'>Volver</a>
+<a class="btn btn-default" href='/posts/'> Ver todos los posts</a>
 
 </body>
 </html>
