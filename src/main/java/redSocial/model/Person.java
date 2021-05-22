@@ -9,8 +9,7 @@ import java.util.Set;
 import org.springframework.data.neo4j.core.schema.*;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 
-@Node
-@Component
+@Node("Person")
 public class Person {
 
 	@Id
@@ -21,12 +20,26 @@ public class Person {
 	private String lastName;
 	private String username;
 	
-	@Relationship(type="INTERESTED IN",direction=Relationship.OUTGOING)
-	private Set<Hobby> hobbies;
+	@Relationship(type="INTERESTED_IN",direction=Relationship.OUTGOING)
+	private Set<Hobby> interested;
 	@Relationship(type="FOLLOWS",direction=Relationship.OUTGOING)
 	private Set<Person> follows;
-	@Relationship(type="FOLLOWED BY",direction=Relationship.INCOMING)
-	private Set<Person> followers;
+	//@Relationship(type="FOLLOWED BY",direction=Relationship.OUTGOING)
+	//private Set<Person> followedBy;
+
+	public Person(String firstName, String lastName, String username, Set<Hobby> hobbies, Set<Person> follows) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.interested = hobbies;
+		this.follows = follows;
+	//	this.followedBy = followers;
+	}
+
+	public Person() {
+		super();
+	}
 
 	public Long getId() {
 		return id;
@@ -61,11 +74,11 @@ public class Person {
 	}
 
 	public Set<Hobby> getHobbies() {
-		return hobbies;
+		return interested;
 	}
 
 	public void setHobbies(Set<Hobby> hobbies) {
-		this.hobbies = hobbies;
+		this.interested = hobbies;
 	}
 
 	public Set<Person> getFollows() {
@@ -76,11 +89,12 @@ public class Person {
 		this.follows = follows;
 	}
 
-	public Set<Person> getFollowers() {
-		return followers;
+	/*public Set<Person> getFollowers() {
+		return followedBy;
 	}
 
 	public void setFollowers(Set<Person> followers) {
-		this.followers = followers;
-	}
+		this.followedBy = followers;
+	}*/
+	
 }
