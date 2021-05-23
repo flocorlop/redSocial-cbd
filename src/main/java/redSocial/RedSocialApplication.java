@@ -15,11 +15,8 @@ import redSocial.model.Hobby;
 import redSocial.model.Person;
 import redSocial.repository.HobbyRepository;
 import redSocial.repository.PersonRepository;
-
-import redSocial.model.Person;
-import redSocial.model.Post;
-import redSocial.repository.PersonRepository;
 import redSocial.repository.PostRepository;
+import redSocial.model.Post;
 import redSocial.service.PostService;
 
 @EnableConfigurationProperties
@@ -32,79 +29,64 @@ public class RedSocialApplication {
 
 		SpringApplication.run(RedSocialApplication.class, args);
 	}
-	
+
 	@Bean
-	CommandLineRunner crearBBDD(HobbyRepository hobR, PersonRepository perR) {
+	CommandLineRunner crearBBDD(HobbyRepository hobR, PersonRepository perR, PostService postS, PostRepository postR) {
 		return args -> {
 			hobR.deleteAll();
 			perR.deleteAll();
-			
-			Set<Person> emptyP = new HashSet<>();
+			postR.deleteAll();
+
+			Set<Person> sinSeguidores = new HashSet<>();
 
 			Hobby ho1 = new Hobby("Futbol");
 			Hobby ho2 = new Hobby("Baloncesto");
 			Hobby ho3 = new Hobby("Badminton");
-			
-			Person pe1 = new Person("Juanjo", "Leon", "jualeoval", null, emptyP);
 
-			Set<Hobby> SH1 = new HashSet<>();SH1.add(ho1);SH1.add(ho2);
-			Set<Person> SP1 = new HashSet<>();SP1.add(pe1);
-			
-			Person pe2 = new Person("Flor", "Correa", "flocorlop",SH1,emptyP);
-			
-			Set<Person> SP2 = new HashSet<>();SP2.add(pe2);
+			Person admin = new Person("Admin", "ad", "admin", null, sinSeguidores);
+			Person pe1 = new Person("Juanjo", "Leon", "jualeoval", null, sinSeguidores);
 
-			Person pe3 = new Person("Sara", "Romero", "sarromcar",null,emptyP);
-			Person pe4 = new Person("Fran", "Lopez", "fralopdez",null,emptyP);
+			Set<Hobby> setHobbies1 = new HashSet<>();
+			setHobbies1.add(ho1);
+			setHobbies1.add(ho2);
+			
+			Set<Person> seguidores1 = new HashSet<>();
+			seguidores1.add(pe1);
 
-		
+			Person pe2 = new Person("Flor", "Correa", "flocorlop", setHobbies1, sinSeguidores);
+
+			Set<Person> seguidores2 = new HashSet<>();
+			seguidores2.add(pe1);
+			seguidores2.add(pe2);
+
+			Person pe3 = new Person("Sara", "Romero", "sarromcar", null, seguidores1);
+			Person pe4 = new Person("Fran", "Lopez", "fralopdez", null, seguidores2);
+
 			hobR.save(ho3);
+			perR.save(admin);
 			perR.save(pe1);
 			perR.save(pe2);
 			perR.save(pe3);
 			perR.save(pe4);
-		};
-	}
 
-	// probando post y relaciones
-	@Bean
-	CommandLineRunner crearBBDD2(PostService postS, PostRepository postR, PersonRepository perR) {
-		return args -> {
-			postR.deleteAll();
-			perR.deleteAll();
-
-			Person pe1 = new Person("flor", "correa", "fcl");
-			Person pe2 = new Person("isa", "duran", "idv");
-			Person pe3 = new Person("eva", "romero", "erj");
-			Person pe4 = new Person("lau", "roman", "lrh");
-
-			Set<Person> set1 = new HashSet<Person>();
-			set1.add(pe1);
-			set1.add(pe2);
-			set1.add(pe3);
-			set1.add(pe4);
-
-			Set<Person> set2 = new HashSet<Person>();
-			set2.add(pe2);
-			set2.add(pe4);
+			Set<Person> likers1 = new HashSet<Person>();
+			likers1.add(pe1);
 			
-			Set<Person> setV = new HashSet<Person>();
+			Set<Person> likersVacio = new HashSet<Person>();
+
+			Post po1 = new Post(likers1.size(), "post 1", likers1, pe1);
+			Post po2 = new Post(likersVacio.size(), "post 2", likersVacio, pe2);
+			Post po3 = new Post(likersVacio.size(), "post 3", likersVacio, pe3);
+			Post po4 = new Post(likersVacio.size(), "post 4", likersVacio, pe4);
+			Post po5 = new Post(likers1.size(), "post 5", likers1, pe2);
 			
-			Post po1 = new Post(set1.size(), "post 1", set1, pe1);
-			Post po2 = new Post(setV.size(), "post 2", setV, pe2);
-			Post po3 = new Post(setV.size(), "post 3", setV, pe3);
-			Post po4 = new Post(setV.size(), "post 4", setV, pe4);
-			Post po5 = new Post(set1.size(), "post 5", set1, pe2);
 			postS.savePost(po1);
 			postS.savePost(po2);
 			postS.savePost(po3);
 			postS.savePost(po4);
 			postS.savePost(po5);
-
-			perR.save(pe1);
-			perR.save(pe2);
-			perR.save(pe3);
-			perR.save(pe4);
 		};
 	}
+
+	
 }

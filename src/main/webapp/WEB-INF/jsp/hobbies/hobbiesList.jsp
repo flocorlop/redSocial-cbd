@@ -41,7 +41,7 @@
 				<h2 class="text-center">Hobbies</h2>
 				<p class="text-center">Aquí encontrarás todos los hobbies.</p>
 				<a class="btn btn-primary btn-lg btn-block" href="/hobbies/new">Crear
-					hobbie</a> <br>
+					hobby</a> <br>
 			</div>
 			<div class="row people">
 				<c:forEach items="${hobbies}" var="h">
@@ -50,21 +50,21 @@
 							<h3 class="firstName">
 								<c:out value="${h.name}"></c:out>
 							</h3>
-							<p class="title">
-								Personas:
-								<c:out value="${h.name}"></c:out>
-							</p>
+<!-- 							<p class="title"> -->
+<!-- 								Personas: -->
+<%-- 								<c:out value="${h.name}"></c:out> --%>
+<!-- 							</p> -->
 							<a class="btn btn-default" href='/hobbies/${h.name}/'><button
 									type="button" class="btn btn-outline-info"
 									data-mdb-ripple-color="dark">Detalles</button></a>
 							<a class="btn btn-default" href='/hobbies/jualeoval/join/${h.name}/'><button
-									type="button" class="btn btn-outline-info"
+									type="button" class="btn btn-outline-success"
 									data-mdb-ripple-color="dark">Unirse</button></a> 
 							<a	class="btn btn-default" href='/hobbies/${h.id}/edit'><button
 									type="button" class="btn btn-outline-info"
 									data-mdb-ripple-color="dark">Editar</button></a> 
 							<a	class="btn btn-default" href='/hobbies/${h.id}/delete'><button
-									type="button" class="btn btn-outline-info"
+									type="button" class="btn btn-outline-danger"
 									data-mdb-ripple-color="dark">Eliminar</button></a>
 
 						</div>

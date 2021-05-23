@@ -42,7 +42,8 @@
 							<div class="col-sm-4 bg-c-lite-green user-profile">
 								<div class="card-block text-center text-white">
 									<div class="m-b-25">
-										<img src="https://cdn.onlinewebfonts.com/svg/img_227642.png"
+										<img
+											src="https://www.pinclipart.com/picdir/middle/411-4116471_hobbies-icon-vector-electricity-png-clipart.png"
 											class="img-radius" alt="User-Profile-Image" width=60%>
 									</div>
 									<h3 class="f-w-600">
@@ -62,29 +63,42 @@
 									</h4>
 									<div class="row">
 										<div class="col-sm-10">
-
-											Interesados:
-											<c:forEach items="${interested}" var="p">
-												<div class="col-md-6 col-lg-4 item">
-													<div class="box">
-														<h3 class="firstName">
+											<p class="m-b-10 f-w-600">Interesados:</p>
+											<h6 class="text-muted f-w-400">
+												<c:forEach items="${interested}" var="p">
+													<div class="col-md-10 item">
+														<p>
 															@
 															<c:out value="${p.username}"></c:out>
-														</h3>
-														<p class="title">
-															Nombre:
+															, Nombre:
 															<c:out value="${p.firstName}"></c:out>
-														</p>
-														<p class="description">
-															Apellido:
+															, Apellido:
 															<c:out value="${p.lastName}"></c:out>
-														</p>
-														<a class="btn btn-default" href='/persons/${p.username}/'><button
-																type="button" class="btn btn-outline-info"
-																data-mdb-ripple-color="dark">Detalles</button></a>
+															<a class="btn btn-default" href='/persons/${p.username}/'>
+																<button type="button" class="btn btn-outline-info"
+																	data-mdb-ripple-color="dark">Detalles</button>
+															</a>
+
+															<!-- 													<div class="box"> -->
+															<!-- 														<h3 class="firstName"> -->
+															<!-- 															@ -->
+															<%-- 															<c:out value="${p.username}"></c:out> --%>
+															<!-- 														</h3> -->
+															<!-- 														<p class="title"> -->
+															<!-- 															Nombre: -->
+															<%-- 															<c:out value="${p.firstName}"></c:out> --%>
+															<!-- 														</p> -->
+															<!-- 														<p class="description"> -->
+															<!-- 															Apellido: -->
+															<%-- 															<c:out value="${p.lastName}"></c:out> --%>
+															<!-- 														</p> -->
+															<%-- 														<a class="btn btn-default" href='/persons/${p.username}/'><button --%>
+															<!-- 																type="button" class="btn btn-outline-info" -->
+															<!-- 																data-mdb-ripple-color="dark">Detalles</button></a> -->
+															<!-- 													</div> -->
 													</div>
-												</div>
-											</c:forEach>
+												</c:forEach>
+											</h6>
 										</div>
 									</div>
 								</div>

@@ -44,13 +44,13 @@
 							<div class="col-sm-4 bg-c-lite-green user-profile">
 								<div class="card-block text-center text-white">
 									<div class="m-b-25">
-										<img src="https://cdn.onlinewebfonts.com/svg/img_227642.png"
+										<img src="https://www.pinclipart.com/picdir/middle/411-4116471_hobbies-icon-vector-electricity-png-clipart.png"
 											class="img-radius" alt="User-Profile-Image" width=60%>
 									</div>
-									<h3 class="f-w-600">
-										@
-										<c:out value="${myself}"></c:out>
-									</h3>
+<!-- 									<h3 class="f-w-600"> -->
+<!-- 										@ -->
+<%-- 										<c:out value="${myself}"></c:out> --%>
+<!-- 									</h3> -->
 									<!-- 									<p>Web Designer</p> -->
 									<i
 										class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
@@ -64,9 +64,11 @@
 										<div class="col-sm-10">
 											<div class="m-b-10 f-w-600">
 												<form action="/hobbies/${h.id}/edit" method="POST">
-													<label for="name">Name:</label><br> <input
+													<label for="name">Nombre:</label><br> <input
 														type="text" id="name" name="name"value="${h.name}"><br>
-												</form> <input type="submit" value="Submit">
+														<br>
+														<button class="btn btn-outline-success" type="submit">Editar</button>
+												</form> 
 											</div>
 										</div>
 									</div>

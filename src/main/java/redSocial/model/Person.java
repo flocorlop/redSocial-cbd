@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import org.neo4j.ogm.annotation.Relationship;
 import java.util.Set;
 import org.springframework.data.neo4j.core.schema.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Node;
 

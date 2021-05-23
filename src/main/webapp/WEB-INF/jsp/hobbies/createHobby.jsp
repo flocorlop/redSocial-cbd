@@ -44,13 +44,13 @@
 							<div class="col-sm-4 bg-c-lite-green user-profile">
 								<div class="card-block text-center text-white">
 									<div class="m-b-25">
-										<img src="https://cdn.onlinewebfonts.com/svg/img_227642.png"
+										<img src="https://www.pinclipart.com/picdir/middle/411-4116471_hobbies-icon-vector-electricity-png-clipart.png"
 											class="img-radius" alt="User-Profile-Image" width=60%>
 									</div>
-									<h3 class="f-w-600">
-										@
-										<c:out value="${myself}"></c:out>
-									</h3>
+<!-- 									<h3 class="f-w-600"> -->
+<!-- 										@ -->
+<%-- 										<c:out value="${myself}"></c:out> --%>
+<!-- 									</h3> -->
 									<!-- 									<p>Web Designer</p> -->
 									<i
 										class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
@@ -58,14 +58,15 @@
 							</div>
 							<div class="col-sm-8">
 								<div class="card-block">
-									<h4 class="m-b-20 p-b-5 b-b-default f-w-600">Contenido</h4>
+									<h4 class="m-b-20 p-b-5 b-b-default f-w-600">Nombre</h4>
 									<div class="row">
 										<div class="col-sm-10">
 											<div class="m-b-10 f-w-600">
 												<form action="/hobbies/new" method="POST">
-													<label for="name">Name:</label><br> <input
-														type="text" id="name" name="name"><br>
-												</form> <input type="submit" value="Submit">
+<!-- 													<label for="name">Nombre:</label><br> -->
+														 <input type="text" id="name" name="name"><br> <br>
+														 <button class="btn btn-outline-success" type="submit">Crear</button>
+												</form> 
 											</div>
 										</div>
 									</div>
