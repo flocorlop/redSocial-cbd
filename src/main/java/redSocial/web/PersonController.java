@@ -5,13 +5,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-//import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,12 +66,6 @@ public class PersonController {
 	}
 	
 	
-	/*
-	@PostMapping("/new")
-	private Person savePerson(@RequestBody Person person) {
-		return personService.savePerson(person);
-	}*/
-	
 	@GetMapping("/{myself}/{username}/follow")
 	private String followPerson(@PathVariable("username") String PersonUsername,@PathVariable("myself") String Myself) {
 		
@@ -102,36 +97,7 @@ public class PersonController {
 		
 		return "redirect:/persons/";
 
-		
-
- 		
-		
-		
-		
-		
-		
-		/*Person you = personService.findByUsername(PersonUsername);
-		Person me = personService.findByUsername("jualeoval");
-		
-		//Set<Person> followers = you.getFollowers();
-		Set<Person> follows = me.getFollows();
-
-		if (follows==null) {
-			follows=new HashSet<>();
 		}
-		//if (followers==null) {
-			//followers=new HashSet<>();
-		}
-		
-		//followers.add(me);
-		follows.add(you);
-		me.setFollows(follows);
-		you.setFollowers(followers);
-				
-		personService.savePerson(me);
-		personService.savePerson(you);
-		*/
-	}
 	
 	@RequestMapping("/")
     public String findAllPersons(Model model) {
@@ -174,10 +140,6 @@ public class PersonController {
 			return "redirect:/persons/all";
 		}
 	}
-	
-	
-	
-
 	
 	
 }

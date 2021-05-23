@@ -12,4 +12,15 @@ public class HolaController {
 		model.addAttribute("message", "Hello World");
 		return "mensaje";
 	}
+
+	@RequestMapping("/")
+	public String hola() {
+		
+		return "welcome";
+	}
+	@RequestMapping("/about")
+	public String about() {
+		
+		return "contactInfo";
+	}
 }

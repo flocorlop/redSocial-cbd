@@ -3,11 +3,11 @@ package redSocial.model;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.stereotype.Component;
 import org.neo4j.ogm.annotation.Relationship;
-
 import java.util.Set;
-
 import org.springframework.data.neo4j.core.schema.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Node;
 
 @Node("Person")
 public class Person {
@@ -22,10 +22,10 @@ public class Person {
 	
 	@Relationship(type="INTERESTED_IN",direction=Relationship.OUTGOING)
 	private Set<Hobby> interested;
+	
 	@Relationship(type="FOLLOWS",direction=Relationship.OUTGOING)
 	private Set<Person> follows;
-	//@Relationship(type="FOLLOWED BY",direction=Relationship.OUTGOING)
-	//private Set<Person> followedBy;
+	
 
 	public Person(String firstName, String lastName, String username, Set<Hobby> hobbies, Set<Person> follows) {
 		super();
@@ -34,7 +34,7 @@ public class Person {
 		this.username = username;
 		this.interested = hobbies;
 		this.follows = follows;
-	//	this.followedBy = followers;
+	
 	}
 
 	public Person() {
@@ -89,12 +89,6 @@ public class Person {
 		this.follows = follows;
 	}
 
-	/*public Set<Person> getFollowers() {
-		return followedBy;
-	}
-
-	public void setFollowers(Set<Person> followers) {
-		this.followedBy = followers;
-	}*/
+	
 	
 }

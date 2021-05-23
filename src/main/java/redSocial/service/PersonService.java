@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,11 +29,31 @@ public class PersonService {
 		return personRepository.save(person);
 	}
 	public List<Person> getPersons() {
-		return (List<Person>) personRepository.findAll();
+		return (List<Person>) personRepository.getPersons();
 	}
-	public Person findByUsername(String personUsername) {
+	
+	public Person findByUsername(@Param("personUsername")String personUsername) {
 		return personRepository.findByUsername(personUsername);
 	}
+	
+	public Person findUploadedbyByPostID(@Param("id")int  id) {
+		return personRepository.findUploadedbyByPostID(id);
+		
+	}
+	public Set<Person> findLikedbyByPostID(@Param("id")int  id) {
+		return personRepository.findLikedbyByPostID(id);
+		
+	}
+	
+	public Integer findPIdByUsername(@Param("personUsername")String personUsername)  {
+		return this.personRepository.findPIdByUsername(personUsername);
+	}
+	public Person findPById(@Param("id")int  id)  {
+		return this.personRepository.findPById(id);
+	}
+	//public Person findByUsername(String personUsername) {
+	//	return personRepository.findByUsername(personUsername);
+	//}
 	
 	public void deletePersonbyId(long id) {
 		personRepository.deleteById(id);
