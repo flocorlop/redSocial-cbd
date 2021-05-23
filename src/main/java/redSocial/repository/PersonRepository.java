@@ -24,12 +24,11 @@ public interface PersonRepository extends Neo4jRepository<Person, Long> {
 	@Query("MATCH (p:Person {username:$personUsername})-[r1:FOLLOWS]->(pe:Person) return pe")
 	Set<Person> findFollowsByUsername(@Param("personUsername") String personUsername);
 
-	@Query("MATCH (p:Person {username: $personUsername})-[r1:FOLLOWED_BY]->(pe:Person) return pe")
+	@Query("MATCH (p:Person {username:$personUsername})<-[r1:FOLLOWS]-(pe:Person) return pe")
 	Set<Person> findFollowersbyUsername(@Param("personUsername")String personUsername);
 
 	@Query("MATCH (p:Person)-[r:INTERESTED]->(h:Hobby{name:$name}) return p")
 	Set<Person> findPersonByHobbyName(@Param("name") String name);
-
 
 	@Query("MATCH (n:Person) RETURN n")
 	List<Person> getPersons();

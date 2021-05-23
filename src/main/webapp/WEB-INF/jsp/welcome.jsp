@@ -50,8 +50,8 @@
 		<!-- Page Features-->
 		<a class="btn btn-primary btn-lg btn-block" href="/admin/posts/new">Crear
 			un post</a> <br> <a class="btn btn-primary btn-lg btn-block"
-			href="/admin/posts/new">Crear una persona</a> <br> <a
-			class="btn btn-primary btn-lg btn-block" href="/admin/posts/new">Crear
+			href="/persons/new">Crear una persona</a> <br> <a
+			class="btn btn-primary btn-lg btn-block" href="/hobbies/new">Crear
 			un hobby</a> <br>
 		<div class="row text-center">
 

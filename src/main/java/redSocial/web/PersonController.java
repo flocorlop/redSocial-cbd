@@ -100,8 +100,10 @@ public class PersonController {
     public String getDetails(Model model, @PathVariable("username") String PersonUsername) {
 		Person p = this.personService.findByUsername(PersonUsername);
 		Set<Hobby> h = this.hobbyService.findHobbiesbyUsername(PersonUsername); 
+		Set<Person> f = this.personService.findFollowersbyUsername(PersonUsername);
 		model.addAttribute("p", p);
 		model.addAttribute("h", h);
+		model.addAttribute("f", f);
     	return "persons/personDetails";
     }
 	

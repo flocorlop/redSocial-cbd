@@ -79,10 +79,10 @@
 											<c:forEach items="${h}" var="p">
 												<div class="col-md-10 item">
 													<div class="box">
-														<h3 class="name">
+														<h5 class="name">
 															
 															<c:out value="${p.name}"></c:out>
-														</h3>
+														</h5>
 
 
 														<a class="btn btn-default" href='/hobbies/${p.name}/'><button
@@ -97,7 +97,31 @@
 										</div>
 
 									</div>
+	<h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">
+										Seguidores:</h6>
+									<div class="row">
+										<div class="col-sm-10">
+											<p class="m-b-10 f-w-600"></p>
 
+											<c:forEach items="${f}" var="f">
+												<div class="col-md-10 item">
+													<div class="box">
+														<h5 class="name">
+															@<c:out value="${f.username}"></c:out>
+														</h5>
+														
+														<a class="btn btn-default" href='/persons/${f.username}/'><button
+																type="button" class="btn btn-outline-info"
+																data-mdb-ripple-color="dark">Detalles</button></a>
+
+													</div>
+												</div>
+											</c:forEach>
+
+
+										</div>
+
+									</div>
 
 
 
