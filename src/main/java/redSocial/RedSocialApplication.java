@@ -79,12 +79,16 @@ public class RedSocialApplication {
 			Post po3 = new Post(likersVacio.size(), "post 3", likersVacio, pe3);
 			Post po4 = new Post(likersVacio.size(), "post 4", likersVacio, pe4);
 			Post po5 = new Post(likers1.size(), "post 5", likers1, pe2);
+			Post po6 = new Post(likers1.size(), "post 6", likers1, admin);
+			Post po7 = new Post(likers1.size(), "post 7", likersVacio, admin);
 			
 			postS.savePost(po1);
 			postS.savePost(po2);
 			postS.savePost(po3);
 			postS.savePost(po4);
 			postS.savePost(po5);
+			postS.savePost(po6);
+			postS.savePost(po7);
 		};
 	}
 

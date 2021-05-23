@@ -44,7 +44,7 @@
 	<form:form>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<form action="/fcl/posts/${p.id}/delete" method="post">
+				<form action="/admin/posts/${p.id}/delete" method="post">
 					<button type="submit" class="btn btn-outline-danger">Borrar
 						post</button>
 				</form>

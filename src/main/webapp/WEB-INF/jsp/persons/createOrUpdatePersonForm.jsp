@@ -58,18 +58,20 @@
 							</div>
 							<div class="col-sm-8">
 								<div class="card-block">
-									<h4 class="m-b-20 p-b-5 b-b-default f-w-600">Contenido</h4>
+									<h4 class="m-b-20 p-b-5 b-b-default f-w-600">Rellene los
+										datos</h4>
 									<div class="row">
 										<div class="col-sm-10">
 											<div class="m-b-10 f-w-600">
 												<form action="/persons/new" method="POST">
-													<label for="fname">First name:</label><br> <input
+													<label for="fname">Nombre:</label><br> <input
 														type="text" id="firstName" name="firstName"><br>
-													<label for="lname">Last name:</label><br> <input
+													<label for="lname">Apellido:</label><br> <input
 														type="text" id="lastName" name="lastName"><br>
-													<label for="lname">Username:</label><br> <input
+													<label for="lname">Usuario:</label><br> <input
 														type="text" id="username" name="username"><br>
-													<br> <input type="submit" value="Submit">
+													<br>
+													<button class="btn btn-outline-success" type="submit">Crear</button>
 												</form>
 											</div>
 										</div>
@@ -81,8 +83,8 @@
 					</div>
 				</div>
 			</div>
-			<a class="btn btn-primary" href='/persons/all'>Cancelar, ver todos los
-				usuarios</a>
+			<a class="btn btn-primary" href='/persons/'>Cancelar, ver todos
+				los usuarios</a>
 		</div>
 	</div>
 

@@ -1,7 +1,5 @@
 package redSocial.web;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,14 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
 import redSocial.model.Hobby;
 import redSocial.model.Person;
-import redSocial.repository.HobbyRepository;
 import redSocial.service.HobbyService;
 import redSocial.service.PersonService;
 
@@ -51,8 +44,8 @@ public class HobbyController {
 			return "hobbies/createHobby";
 		}
 		else {
-			Person p = personService.findByUsername("jualeoval");
-			Set<Hobby> hobbies = hobbyService.findHobbiesbyUsername("jualeoval");
+			Person p = personService.findByUsername("admin");
+			Set<Hobby> hobbies = hobbyService.findHobbiesbyUsername("admin");
 			hobbies.add(h);
 			p.setHobbies(hobbies);
 			System.out.println("Nuevo hobbie creado. Nombre: "+h.getName());
@@ -85,10 +78,10 @@ public class HobbyController {
 		return "redirect:/hobbies/all";
 	}
 	
-	@GetMapping(value="/jualeoval/join/{name}")
+	@GetMapping(value="/admin/join/{name}")
 	public String joinHobby(@PathVariable("name") String name) {
-		Person me = personService.findByUsername("jualeoval");
-		Set<Hobby> mHobby = hobbyService.findHobbiesbyUsername("jualeoval");
+		Person me = personService.findByUsername("admin");
+		Set<Hobby> mHobby = hobbyService.findHobbiesbyUsername("admin");
 		System.out.println(mHobby);
 		Hobby h = hobbyService.getHobbyByName(name);
 		System.out.println(h.getName());

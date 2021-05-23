@@ -43,11 +43,16 @@
 			<h1 class="display-3">Bienvenid@</h1>
 			<p class="lead">Aplicación web donde podrás ver posts
 				(publicaciones de texto), dar me gusta (like) y seguir personas.</p>
-			<a class="btn btn-primary btn-lg" href="/posts">Ver posts</a>
+			<a class="btn btn-primary btn-lg" href="/posts">Ver posts</a> <a
+				class="btn btn-primary btn-lg" href="/persons/">Ver personas</a> <a
+				class="btn btn-primary btn-lg" href="/hobbies/all">Ver hobbies</a>
 		</header>
 		<!-- Page Features-->
-		<a class="btn btn-primary btn-lg btn-block" href="/fcl/posts/new">Crear
-			un post</a> <br>
+		<a class="btn btn-primary btn-lg btn-block" href="/admin/posts/new">Crear
+			un post</a> <br> <a class="btn btn-primary btn-lg btn-block"
+			href="/admin/posts/new">Crear una persona</a> <br> <a
+			class="btn btn-primary btn-lg btn-block" href="/admin/posts/new">Crear
+			un hobby</a> <br>
 		<div class="row text-center">
 
 			<div class="col-lg-4 col-md-6 mb-4">
@@ -79,7 +84,7 @@
 					</div>
 					<div class="card-footer">
 						<form action="/posts/searchByText/" method="get">
-							<label for="text">Text:</label><br> <input type="text"
+							<label for="text">Texto:</label><br> <input type="text"
 								id="text" name="text"><br>
 
 							<button class="btn btn-default" type="submit">Buscar</button>
@@ -97,7 +102,7 @@
 					</div>
 					<div class="card-footer">
 						<form action="/posts/containsText/" method="get">
-							<label for="text">Text:</label><br> <input type="text"
+							<label for="text">Texto:</label><br> <input type="text"
 								id="text" name="text"><br>
 
 							<button class="btn btn-default" type="submit">Buscar</button>

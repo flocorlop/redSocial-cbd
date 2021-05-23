@@ -1,9 +1,5 @@
 package redSocial.web;
 
-import java.security.Principal;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,18 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import redSocial.model.Hobby;
 import redSocial.model.Person;
-import redSocial.repository.PersonRepository;
 import redSocial.service.HobbyService;
 import redSocial.service.PersonService;
 
@@ -55,13 +45,13 @@ public class PersonController {
 			return VIEWS_PERSON_CREATE_OR_UPDATE_FORM;
 		}
 		else {
-			Set<Person> eP = new HashSet<>(); 
-			Set<Hobby> eH = new HashSet<>(); 
+//			Set<Person> eP = new HashSet<>(); 
+//			Set<Hobby> eH = new HashSet<>(); 
 			//p.setFollowers(eP);p.setFollows(eP);
 			//;p.setHobbies(eH);
 			//System.out.println(p.getFirstName()+p.getLastName()+p.getUsername()+p.getFollowers()+p.getFollows()+p.getHobbies());
 			this.personService.savePerson(p);
-			return "redirect:/persons/all";
+			return "redirect:/persons/";
 		}
 	}
 	
@@ -118,7 +108,7 @@ public class PersonController {
 	@GetMapping("/{id}/delete")
 	public String deleteHobby(@PathVariable("id") int id) {
 		personService.deletePersonbyId((long)id);
-		return "redirect:/persons/all";
+		return "redirect:/persons/";
 	}
 	
 	@GetMapping(value = "/{id}/edit")
@@ -137,7 +127,7 @@ public class PersonController {
 		else {
 			System.out.println(p.getFirstName()+p.getLastName()+p.getUsername()+p.getFollows()+p.getHobbies());
 			this.personService.savePerson(p);
-			return "redirect:/persons/all";
+			return "redirect:/persons/";
 		}
 	}
 	

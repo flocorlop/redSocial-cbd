@@ -57,8 +57,8 @@
 							<div class="col-sm-8">
 								<div class="card-block">
 									<h4 class="m-b-20 p-b-5 b-b-default f-w-600">
-										Usuario @
-										<c:out value="${p.username}"></c:out>
+										Detalles
+<%-- 										<c:out value="${p.username}"></c:out> --%>
 									</h4>
 									<div class="row">
 										<div class="col-sm-10">
@@ -77,10 +77,10 @@
 											<p class="m-b-10 f-w-600"></p>
 
 											<c:forEach items="${h}" var="p">
-												<div class="col-md-6 col-lg-4 item">
+												<div class="col-md-10 item">
 													<div class="box">
 														<h3 class="name">
-															@
+															
 															<c:out value="${p.name}"></c:out>
 														</h3>
 

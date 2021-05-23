@@ -54,16 +54,16 @@
 								Nombre:
 								<c:out value="${p.firstName}"></c:out>
 							</p>
-							<p class="description">
-								Apellido:
-								<c:out value="${p.lastName}"></c:out>
-							</p>
+<!-- 							<p class="description"> -->
+<!-- 								Apellido: -->
+<%-- 								<c:out value="${p.lastName}"></c:out> --%>
+<!-- 							</p> -->
 
 							<a class="btn btn-default" href='/persons/${p.username}/'><button
 									type="button" class="btn btn-outline-info"
 									data-mdb-ripple-color="dark">Detalles</button></a>
-							<a class="btn btn-default" href='/persons/jualeoval/${p.username}/follow'><button
-									type="button" class="btn btn-outline-info"
+							<a class="btn btn-default" href='/persons/admin/${p.username}/follow'><button
+									type="button" class="btn btn-outline-success"
 									data-mdb-ripple-color="dark">Seguir</button></a>
 							
 							
@@ -71,7 +71,7 @@
 									type="button" class="btn btn-outline-info"
 									data-mdb-ripple-color="dark">Editar</button></a> 
 							<a	class="btn btn-default" href='/persons/${p.id}/delete'><button
-									type="button" class="btn btn-outline-info"
+									type="button" class="btn btn-outline-danger"
 									data-mdb-ripple-color="dark">Eliminar</button></a>
 
 						</div>

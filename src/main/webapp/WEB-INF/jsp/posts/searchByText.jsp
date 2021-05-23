@@ -45,7 +45,7 @@
 					<div class="col-md-6 col-lg-4 item">
 						<div class="box">
 							<p>
-							<form action="/fcl/posts/${p.id}/like" method="post">
+							<form action="/admin/posts/${p.id}/like" method="post">
 									<button type="submit" class="btn btn-primary">Like</button>
 								</form>
 							</p>

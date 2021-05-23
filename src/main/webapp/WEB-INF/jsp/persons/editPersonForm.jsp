@@ -64,12 +64,14 @@
 											<div class="m-b-10 f-w-600">
 												<form action="/persons/${p.id}/edit" method="POST">
 													<label for="fname">First name:</label><br> <input
-														type="text" id="firstName" name="firstName" value="${p.firstName}"><br>
-													<label for="lname">Last name:</label><br> <input
-														type="text" id="lastName" name="lastName" value="${p.lastName}"><br>
+														type="text" id="firstName" name="firstName"
+														value="${p.firstName}"><br> <label
+														for="lname">Last name:</label><br> <input type="text"
+														id="lastName" name="lastName" value="${p.lastName}"><br>
 													<label for="lname">Username:</label><br> <input
-														type="text" id="username" name="username" value="${p.username}"><br>
-													<br> <input type="submit" value="Submit">
+														type="text" id="username" name="username"
+														value="${p.username}"><br> <br>
+													<button class="btn btn-outline-success" type="submit">Editar</button>
 												</form>
 											</div>
 										</div>
@@ -81,8 +83,8 @@
 					</div>
 				</div>
 			</div>
-			<a class="btn btn-primary" href='/persons/all'>Cancelar, ver todos los
-				usuarios</a>
+			<a class="btn btn-primary" href='/persons/'>Cancelar, ver
+				todos los usuarios</a>
 		</div>
 	</div>
 

@@ -57,7 +57,7 @@
 							<a class="btn btn-default" href='/hobbies/${h.name}/'><button
 									type="button" class="btn btn-outline-info"
 									data-mdb-ripple-color="dark">Detalles</button></a>
-							<a class="btn btn-default" href='/hobbies/jualeoval/join/${h.name}/'><button
+							<a class="btn btn-default" href='/hobbies/admin/join/${h.name}/'><button
 									type="button" class="btn btn-outline-success"
 									data-mdb-ripple-color="dark">Unirse</button></a> 
 							<a	class="btn btn-default" href='/hobbies/${h.id}/edit'><button
